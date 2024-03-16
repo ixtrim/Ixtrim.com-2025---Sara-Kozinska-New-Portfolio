@@ -8,7 +8,7 @@ function App() {
       <Global
         styles={css`
           body {
-            font-family: ${theme.fonts.heading};
+            font-family: ${theme.fonts.body};
             background-color: ${theme.colors.background};
             color: ${theme.colors.text};
           }

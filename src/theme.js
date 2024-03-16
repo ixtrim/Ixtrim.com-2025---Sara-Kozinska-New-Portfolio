@@ -12,6 +12,7 @@ const theme = {
     heading: "'Lancelot', cursive",
   },
   fontSizes: {
+    base: '18px',
     small: '0.8rem',
     medium: '1rem',
     large: '1.5rem',
@@ -25,11 +26,10 @@ const theme = {
     extraBold: 800,
   },
   breakpoints: {
-    mobile: 'only screen and (max-width: 480px)',
-    tablet: 'only screen and (min-width: 481px) and (max-width: 768px)',
-    notebook: 'only screen and (min-width: 769px) and (max-width: 990px)',
-    desktop: 'only screen and (min-width: 991px) and (max-width: 1200px)',
-    large: 'only screen and (min-width: 1201px)',
+    xs: '480px',
+    sm: '768px',
+    md: '990px',
+    lg: '1200px',
   },
 };
 
