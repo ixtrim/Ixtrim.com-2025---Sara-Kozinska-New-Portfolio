@@ -1,10 +1,23 @@
-import styled from '@emotion/styled';
+import React from 'react';
+import { ThemeProvider, Global, css } from '@emotion/react';
+import theme from './theme'; // Ensure this path is correct
 
 function App() {
   return (
-    <div className="App">
-      My APP
-    </div>
+    <ThemeProvider theme={theme}>
+      <Global
+        styles={css`
+          body {
+            font-family: ${theme.fonts.heading};
+            background-color: ${theme.colors.background};
+            color: ${theme.colors.text};
+          }
+        `}
+      />
+      <div className="App">
+        My APP
+      </div>
+    </ThemeProvider>
   );
 }
 
