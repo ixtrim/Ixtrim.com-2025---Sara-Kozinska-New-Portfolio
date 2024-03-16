@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider, Global, css } from '@emotion/react';
 import theme from './theme';
 import VideoBackground from './components/layout/VideoBackground';
+import Link from './components/common/Link';
 import Button from './components/common/Button';
 
 
@@ -21,7 +22,7 @@ function App() {
         `}
       />
       <VideoBackground />
-      <div className="App">
+      <div className="App"><center>
         <p>Whoever you are, your presence here means that I may have (or be) something you are looking for. But before we get down to business, let me introduce myself.</p>
 
         <p>My name is Sara Kozińska. I was born on 21.10.1987 in Warsaw, Poland. Currently I live in sunny Barcelona, Spain, where I live with my stubborn (but still cute) French bulldog Lilo.</p>
@@ -72,11 +73,19 @@ function App() {
           Click Me
         </Button>
         <br/><br/>
-        <Button variant="grey" size="large" onClick={() => console.log('Clicked!')}>
+        <Link href="https://example.com" target="_blank" rel="noopener noreferrer" title="Example Site" variant="white" size="small">
           Click Me
-        </Button>
+        </Link>
         <br/><br/>
-        
+        <Link href="https://example.com" target="_blank" rel="noopener noreferrer" title="Example Site" variant="white" size="medium">
+          Click Me
+        </Link>
+        <br/><br/>
+        <Link href="https://example.com" target="_blank" rel="noopener noreferrer" title="Example Site" variant="white" size="large">
+          Click Me
+        </Link>
+        <br/><br/>
+        </center>
       </div>
     </ThemeProvider>
   );

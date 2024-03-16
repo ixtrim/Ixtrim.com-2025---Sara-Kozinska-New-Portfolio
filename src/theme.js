@@ -79,6 +79,35 @@ const theme = {
       hoverBorder: 'none',
     },
   },
+  linkSizes: {
+    small: {
+      fontSize: '11px',
+    },
+    medium: {
+      fontSize: '13px',
+    },
+    large: {
+      fontSize: '16px',
+    },
+  },
+  linkVariants: {
+    white: {
+      color: 'white',
+      hoverColor: '#fdb32b',
+    },
+    red: {
+      color: '#ed1d23',
+      hoverColor: '#ffffff',
+    },
+    orange: {
+      color: '#fdb32b',
+      hoverColor: '#ffffff',
+    },
+    grey: {
+      color: '#5b5b5c',
+      hoverColor: '#fdb32b',
+    },
+  },
 };
 
 export default theme;
