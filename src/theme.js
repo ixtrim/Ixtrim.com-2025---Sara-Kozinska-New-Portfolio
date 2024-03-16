@@ -12,7 +12,7 @@ const theme = {
     heading: "'Lancelot', cursive",
   },
   fontSizes: {
-    base: '18px',
+    base: '14px',
     small: '0.8rem',
     medium: '1rem',
     large: '1.5rem',
@@ -30,6 +30,20 @@ const theme = {
     sm: '768px',
     md: '990px',
     lg: '1200px',
+  },
+  buttonSizes: {
+    small: {
+      padding: '8px 12px',
+      fontSize: '14px',
+    },
+    medium: {
+      padding: '10px 16px',
+      fontSize: '16px', // Ensure this matches what you're trying to access
+    },
+    large: {
+      padding: '12px 20px',
+      fontSize: '18px',
+    },
   },
 };
 
