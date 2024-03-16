@@ -20,7 +20,7 @@ function App() {
           }
         `}
       />
-      <VideoBackground src="path/to/your/video.mp4" />
+      <VideoBackground />
       <div className="App">
         <p>Whoever you are, your presence here means that I may have (or be) something you are looking for. But before we get down to business, let me introduce myself.</p>
 
