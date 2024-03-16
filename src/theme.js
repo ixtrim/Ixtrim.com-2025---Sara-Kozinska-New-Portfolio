@@ -34,15 +34,49 @@ const theme = {
   buttonSizes: {
     small: {
       padding: '8px 12px',
-      fontSize: '14px',
+      fontSize: '11px',
     },
     medium: {
-      padding: '10px 16px',
-      fontSize: '16px', // Ensure this matches what you're trying to access
+      padding: '12px 20px',
+      fontSize: '13px',
     },
     large: {
-      padding: '12px 20px',
-      fontSize: '18px',
+      padding: '16px 35px',
+      fontSize: '13px',
+    },
+  },
+  buttonVariants: {
+    outlined: {
+      background: 'transparent',
+      color: 'white',
+      border: '2px solid #ffffff',
+      hoverBackground: '#ffffff',
+      hoverColor: '#141516',
+      hoverBorder: '2px solid #ffffff',
+    },
+    red: {
+      background: '#ed1d23',
+      color: '#ffffff',
+      border: 'none',
+      hoverBackground: '#fdb32b',
+      hoverColor: '#141516',
+      hoverBorder: 'none',
+    },
+    orange: {
+      background: '#fdb32b',
+      color: '#141516',
+      border: 'none',
+      hoverBackground: '#ffffff',
+      hoverColor: '#141516',
+      hoverBorder: 'none',
+    },
+    grey: {
+      background: '#5b5b5c',
+      color: '#ffffff',
+      border: 'none',
+      hoverBackground: '#141516',
+      hoverColor: '#fdb32b',
+      hoverBorder: 'none',
     },
   },
 };

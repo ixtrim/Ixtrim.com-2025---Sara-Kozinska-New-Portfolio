@@ -27,9 +27,55 @@ function App() {
         <p>My name is Sara Kozińska. I was born on 21.10.1987 in Warsaw, Poland. Currently I live in sunny Barcelona, Spain, where I live with my stubborn (but still cute) French bulldog Lilo.</p>
 
         <p>Since I can remember I have 3 passions: animals, boards (skateboard, snowboard, wakeboard, surfing...) and computers. To this day they are all part of my life. Over time, other interesting things were added, such as cooking (Mexican and Asian cuisine), drumming, music, filmmaking, traveling and self-development (spiritual development).</p>
-        <Button variant="primary" size="medium" onClick={() => console.log('Clicked!')}>
+
+        <Button variant="outlined" size="small" onClick={() => console.log('Clicked!')}>
           Click Me
         </Button>
+<br/><br/>
+        <Button variant="outlined" size="medium" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="outlined" size="large" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="red" size="small" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+<br/><br/>
+        <Button variant="red" size="medium" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="red" size="large" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="orange" size="small" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+<br/><br/>
+        <Button variant="orange" size="medium" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="orange" size="large" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="grey" size="small" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+<br/><br/>
+        <Button variant="grey" size="medium" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
+        <Button variant="grey" size="large" onClick={() => console.log('Clicked!')}>
+          Click Me
+        </Button>
+        <br/><br/>
         
       </div>
     </ThemeProvider>
