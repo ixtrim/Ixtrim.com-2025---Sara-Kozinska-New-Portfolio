@@ -23,6 +23,7 @@ const componentStyles = css`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  z-index: 3;
 
   &::after {
     content: '';
