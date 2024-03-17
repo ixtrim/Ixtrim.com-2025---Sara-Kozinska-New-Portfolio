@@ -81,7 +81,7 @@ const theme = {
   },
   linkSizes: {
     small: {
-      fontSize: '11px',
+      fontSize: '10px',
     },
     medium: {
       fontSize: '13px',
