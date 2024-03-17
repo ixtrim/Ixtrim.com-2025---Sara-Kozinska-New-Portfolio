@@ -6,6 +6,9 @@ import Link from '../../../components/common/Link';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
+import imgArrowDownWhite from '../../../assets/images/icons__arrow-down--white.svg';
+import imgArrowDownOrange from '../../../assets/images/icons__arrow-down--orange.svg';
+
 // Register the GSAP ScrollToPlugin
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -51,12 +54,28 @@ const componentStyles = css`
       letter-spacing: 2px;
     }
   }
-`;
 
-const arrowStyles = css`
-  cursor: pointer;
-  &:hover {
-    color: ${theme.colors.orange};
+  .arrow {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    z-index: 1;
+    cursor: pointer;
+    background-image: url(${imgArrowDownWhite});
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 12px;
+    height: 15px;
+    transition: transform 0.3s ease-in-out;
+
+    &.arrowUp {
+      transform: rotate(-180deg);
+    }
+    
+    &:hover {
+      background-image: url(${imgArrowDownOrange});
+    }
   }
 `;
 
@@ -90,6 +109,10 @@ const ExternalLinks = () => {
     gsap.to(window, { duration: 1, scrollTo: 0 });
   };
 
+  const scrollToBottom = () => {
+    gsap.to(window, { duration: 1, scrollTo: document.body.scrollHeight });
+  };
+
   return (
     <div css={componentStyles}>
       <nav>
@@ -107,11 +130,7 @@ const ExternalLinks = () => {
           </Link>
         ))}
       </nav>
-      {isAtBottom ? (
-        <span css={css`transform: color: red;`}>↑</span> // Arrow pointing up
-      ) : (
-        <span>↓</span> // Arrow pointing down
-      )}
+      <span className={`arrow ${isAtBottom ? 'arrowUp' : 'arrowDown'}`} onClick={isAtBottom ? scrollToTop : scrollToBottom}></span>
     </div>
   );
 };
