@@ -13,6 +13,7 @@ const theme = {
   },
   fontSizes: {
     base: '14px',
+    smallest: '10px',
     small: '0.8rem',
     medium: '1rem',
     large: '1.5rem',
@@ -81,7 +82,7 @@ const theme = {
   },
   linkSizes: {
     small: {
-      fontSize: '11px',
+      fontSize: '10px',
     },
     medium: {
       fontSize: '13px',
