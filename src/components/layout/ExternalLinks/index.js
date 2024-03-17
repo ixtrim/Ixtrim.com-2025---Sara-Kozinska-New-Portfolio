@@ -58,15 +58,15 @@ const componentStyles = css`
   .arrow {
     position: absolute;
     bottom: 10px;
-    left: 5px;
+    left: 6px;
     z-index: 1;
     cursor: pointer;
     background-image: url(${imgArrowDownWhite});
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
-    width: 12px;
-    height: 15px;
+    width: 10px;
+    height: 13px;
     transition: transform 0.3s ease-in-out;
 
     &.arrowUp {
