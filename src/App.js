@@ -4,6 +4,7 @@ import { ThemeProvider, Global, css } from '@emotion/react';
 import theme from './theme';
 import VideoBackground from './components/layout/VideoBackground';
 import ExternalLinks from './components/layout/ExternalLinks';
+import Languages from './components/layout/Languages';
 import Menu from './components/layout/Menu';
 import Hero from './components/content/Hero';
 import About from './components/content/About';
@@ -50,6 +51,7 @@ function App() {
       <Global styles={globalStyles} />
       <VideoBackground />
       <div css={appContainerStyles}>
+        <Languages />
         <Menu />
         <Hero />
         <About />
