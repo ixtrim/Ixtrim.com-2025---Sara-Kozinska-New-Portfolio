@@ -1,96 +1,84 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
-import { css } from '@emotion/react';
+import React, { useEffect } from 'react';
 import theme from '@/theme';
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { css } from '@emotion/react';
+import paper from 'paper';
 
-gsap.registerPlugin(ScrollToPlugin);
-
-const menuStyles = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  color: ${theme.colors.white};
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  z-index: 2;
-
-  &::after {
-    content: '';
-    position: absolute;
+const cursorStyles = css`
+  .cursor--small {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: ${theme.colors.dark};
-    z-index: -1;
-    opacity: 0.95;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: ${theme.colors.orange};
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10000;
   }
-
-  a {
-    cursor: pointer;
-    color: ${theme.colors.white};
-    text-transform: uppercase;
-    font-size: ${theme.linkSizes.small.fontSize};
-    letter-spacing: 0.35em;
-    text-decoration: none;
-
-    &:hover {
-      color: ${theme.colors.orange};
-    }
+  .cursor--canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
   }
 `;
 
-const Menu = () => {
-  let lastScrollY = window.scrollY;
-  const [hidden, setHidden] = useState(false);
-
+const Cursor = () => {
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-      lastScrollY = currentScrollY;
+    let clientX = window.innerWidth / 2;
+    let clientY = window.innerHeight / 2;
+    const cursorSmall = document.querySelector('.cursor--small');
+
+    // Update small cursor position immediately on mouse move
+    document.addEventListener('mousemove', (e) => {
+      clientX = e.clientX;
+      clientY = e.clientY;
+      // Update small cursor position
+      cursorSmall.style.transform = `translate(${clientX - 4}px, ${clientY - 4}px)`; // Adjust for cursor size
+    });
+
+    // Setup canvas and paper.js
+    paper.setup(document.querySelector('.cursor--canvas'));
+    const strokeColor = "rgba(253, 179, 44, 0.5)";
+    const strokeWidth = 1;
+    // Create a circle that will follow the cursor
+    const circle = new paper.Path.Circle({
+      center: [clientX, clientY],
+      radius: 20,
+      strokeColor,
+      strokeWidth,
+      fillColor: null,
+    });
+
+    let lastX = clientX;
+    let lastY = clientY;
+    const lerp = (a, b, n) => (1 - n) * a + n * b;
+
+    paper.view.onFrame = (event) => {
+      // Apply a bigger delay for the circle's following effect
+      lastX = lerp(lastX, clientX, 0.05); // Decrease the lerp factor for a bigger delay
+      lastY = lerp(lastY, clientY, 0.05);
+      circle.position = new paper.Point(lastX, lastY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      paper.view.onFrame = null; // Cleanup onFrame event handler
+    };
   }, []);
 
-  useEffect(() => {
-    gsap.to("nav.main-menu", { top: hidden ? "-100px" : "0px", ease: "power2.inOut" });
-  }, [hidden]);
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const topPos = section.getBoundingClientRect().top + window.pageYOffset - 150;
-      gsap.to(window, { duration: 1.5, scrollTo: { y: topPos, autoKill: false }, ease: "power2.inOut" });
-    }
-  };
-
   return (
-    <nav className="main-menu" css={menuStyles}>
-      <a onClick={() => scrollToSection('section-hero')}>Start</a>
-      <a onClick={() => scrollToSection('section-about')}>About</a>
-      <a onClick={() => scrollToSection('section-skills')}>Skills</a>
-      <a onClick={() => scrollToSection('section-portfolio')}>Portfolio</a>
-      <a onClick={() => scrollToSection('section-clients')}>Testimonials</a>
-      <a onClick={() => scrollToSection('section-experience')}>Experience</a>
-      <a onClick={() => scrollToSection('section-education')}>Education</a>
-      <a onClick={() => scrollToSection('section-contact')}>Contact</a>
-    </nav>
+    <>
+      <div css={cursorStyles}>
+        <div className="cursor--small"></div>
+        <canvas className="cursor--canvas"></canvas>
+      </div>
+    </>
   );
 };
 
-export default Menu;
+export default Cursor;

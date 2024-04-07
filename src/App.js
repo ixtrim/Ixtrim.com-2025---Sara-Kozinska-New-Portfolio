@@ -14,6 +14,7 @@ import Experience from './components/content/Experience';
 import Education from './components/content/Education';
 import Contact from './components/content/Contact';
 import Footer from './components/layout/Footer';
+import Cursor from './components/layout/Cursor';
 
 const globalStyles = css`
   body {
@@ -23,6 +24,7 @@ const globalStyles = css`
     line-height: 1.5em;
     background-color: ${theme.colors.dark};
     color: ${theme.colors.white};
+    overflow-x: hidden;
   }
 `;
 
@@ -34,6 +36,11 @@ const appContainerStyles = css`
   position: relative;
   z-index: 1;
   display: block;
+
+  & *,
+  a,
+  button {
+  }
 `;
 
 
@@ -54,6 +61,7 @@ function App() {
         <Contact />
         <Footer />
         <ExternalLinks />
+        <Cursor />
       </div>
     </ThemeProvider>
   );
