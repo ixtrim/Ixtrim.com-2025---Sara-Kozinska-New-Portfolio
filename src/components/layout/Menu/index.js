@@ -40,6 +40,7 @@ const menuStyles = css`
     font-size: ${theme.linkSizes.small.fontSize};
     letter-spacing: 0.35em;
     text-decoration: none;
+    transition: color 0.3s ease-in-out;
 
     &:hover {
       color: ${theme.colors.orange};
@@ -81,14 +82,14 @@ const Menu = () => {
 
   return (
     <nav className="main-menu" css={menuStyles}>
-      <a onClick={() => scrollToSection('section-hero')}>Start</a>
-      <a onClick={() => scrollToSection('section-about')}>About</a>
-      <a onClick={() => scrollToSection('section-skills')}>Skills</a>
-      <a onClick={() => scrollToSection('section-portfolio')}>Portfolio</a>
-      <a onClick={() => scrollToSection('section-clients')}>Testimonials</a>
-      <a onClick={() => scrollToSection('section-experience')}>Experience</a>
-      <a onClick={() => scrollToSection('section-education')}>Education</a>
-      <a onClick={() => scrollToSection('section-contact')}>Contact</a>
+      <a onClick={() => scrollToSection('section-hero')} class="regular-link">Start</a>
+      <a onClick={() => scrollToSection('section-about')} class="regular-link">About</a>
+      <a onClick={() => scrollToSection('section-skills')} class="regular-link">Skills</a>
+      <a onClick={() => scrollToSection('section-portfolio')} class="regular-link">Portfolio</a>
+      <a onClick={() => scrollToSection('section-clients')} class="regular-link">Testimonials</a>
+      <a onClick={() => scrollToSection('section-experience')} class="regular-link">Experience</a>
+      <a onClick={() => scrollToSection('section-education')} class="regular-link">Education</a>
+      <a onClick={() => scrollToSection('section-contact')} class="regular-link">Contact</a>
     </nav>
   );
 };
