@@ -42,26 +42,6 @@ const Content = () => {
         <h3>Portfolio/Projects</h3><br/>
         <p>A portfolio section showcasing their best work, including descriptions of each project, the technologies used, their role in the project, and links to live sites or code repositories (e.g., GitHub). Projects that demonstrate real-world application, complexity, and the developer's ability to solve problems are particularly valuable.</p>
       </div>
-      <br/><br/>
-      <div id="section-clients">
-        <h3>Testimonials/Recommendations</h3><br/>
-        <p>Testimonials or recommendations from colleagues, clients, or employers can provide valuable third-party perspectives on the developer's technical abilities, work ethic, and teamwork skills.</p>
-      </div>
-      <br/><br/>
-      <div id="section-experience">
-        <h3>Work Experience</h3><br/>
-        <p>Information on their formal education, including degrees obtained, institutions attended, and any relevant coursework or projects. Additionally, details on any industry certifications or continuous learning efforts (e.g., online courses, workshops) are important.</p>
-      </div>
-      <br/><br/>
-      <div id="section-education">
-        <h3>Education and Certifications</h3><br/>
-        <p>Information on their formal education, including degrees obtained, institutions attended, and any relevant coursework or projects. Additionally, details on any industry certifications or continuous learning efforts (e.g., online courses, workshops) are important.</p>
-      </div>
-      <br/><br/>
-      <div id="section-contact">
-        <h3>Contact Information</h3><br/>
-        <p>Clear and easy ways to contact the developer, including email, LinkedIn profile, and other relevant social media or professional networking profiles.</p>
-      </div>
     </div>
   );
 };

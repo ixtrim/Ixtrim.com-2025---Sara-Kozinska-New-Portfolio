@@ -5,7 +5,14 @@ import theme from './theme';
 import VideoBackground from './components/layout/VideoBackground';
 import ExternalLinks from './components/layout/ExternalLinks';
 import Menu from './components/layout/Menu';
-import Content from './components/layout/Content';
+import Hero from './components/content/Hero';
+import About from './components/content/About';
+import Skills from './components/content/Skills';
+import Portfolio from './components/content/Portfolio';
+import Clients from './components/content/Clients';
+import Experience from './components/content/Experience';
+import Education from './components/content/Education';
+import Contact from './components/content/Contact';
 import Footer from './components/layout/Footer';
 
 const globalStyles = css`
@@ -37,7 +44,14 @@ function App() {
       <VideoBackground />
       <div css={appContainerStyles}>
         <Menu />
-        <Content />
+        <Hero />
+        <About />
+        <Skills />
+        <Portfolio />
+        <Clients />
+        <Experience />
+        <Education />
+        <Contact />
         <Footer />
         <ExternalLinks />
       </div>
