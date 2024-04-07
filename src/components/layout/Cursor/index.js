@@ -16,6 +16,15 @@ const cursorStyles = css`
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 10000;
+    transition: background 0.3s ease, width 0.3s ease, height 0.3s ease, margin 0.3s ease-in-out;
+
+    &.hovered {
+      background: ${theme.colors.red};
+      width: 16px;
+      height: 16px;
+      transform: translate(-50%, -50%);
+      margin: -4px 0 0 -4px;
+    }
   }
   .cursor--canvas {
     position: fixed;
@@ -26,6 +35,7 @@ const cursorStyles = css`
     pointer-events: none;
     z-index: 9999;
   }
+  
 `;
 
 const Cursor = () => {
@@ -34,19 +44,15 @@ const Cursor = () => {
     let clientY = window.innerHeight / 2;
     const cursorSmall = document.querySelector('.cursor--small');
 
-    // Update small cursor position immediately on mouse move
     document.addEventListener('mousemove', (e) => {
       clientX = e.clientX;
       clientY = e.clientY;
-      // Update small cursor position
-      cursorSmall.style.transform = `translate(${clientX - 4}px, ${clientY - 4}px)`; // Adjust for cursor size
+      cursorSmall.style.transform = `translate(${clientX - 4}px, ${clientY - 4}px)`;
     });
 
-    // Setup canvas and paper.js
     paper.setup(document.querySelector('.cursor--canvas'));
-    const strokeColor = "rgba(253, 179, 44, 0.5)";
+    const strokeColor = theme.colors.orange;
     const strokeWidth = 1;
-    // Create a circle that will follow the cursor
     const circle = new paper.Path.Circle({
       center: [clientX, clientY],
       radius: 20,
@@ -60,14 +66,29 @@ const Cursor = () => {
     const lerp = (a, b, n) => (1 - n) * a + n * b;
 
     paper.view.onFrame = (event) => {
-      // Apply a bigger delay for the circle's following effect
-      lastX = lerp(lastX, clientX, 0.05); // Decrease the lerp factor for a bigger delay
+      lastX = lerp(lastX, clientX, 0.05);
       lastY = lerp(lastY, clientY, 0.05);
       circle.position = new paper.Point(lastX, lastY);
     };
 
+    document.body.addEventListener('mouseover', (e) => {
+      if (e.target.matches('.regular-link')) {
+        cursorSmall.classList.add('hovered');
+        circle.strokeColor = theme.colors.red;
+        circle.strokeWidth = 1;
+      }
+    });
+  
+    document.body.addEventListener('mouseout', (e) => {
+      if (e.target.matches('.regular-link')) {
+        cursorSmall.classList.remove('hovered');
+        circle.strokeColor = theme.colors.orange;
+        circle.strokeWidth = 1;
+      }
+    });
+
     return () => {
-      paper.view.onFrame = null; // Cleanup onFrame event handler
+      paper.view.onFrame = null;
     };
   }, []);
 
