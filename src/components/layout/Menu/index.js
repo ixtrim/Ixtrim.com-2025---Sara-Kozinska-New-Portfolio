@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
 import { gsap } from 'gsap';
@@ -33,7 +33,7 @@ const menuStyles = css`
     opacity: 0.95;
   }
 
-  a {
+  button {
     cursor: pointer;
     color: ${theme.colors.white};
     text-transform: uppercase;
@@ -41,6 +41,10 @@ const menuStyles = css`
     letter-spacing: 0.35em;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
 
     &:hover {
       color: ${theme.colors.orange};
@@ -49,19 +53,19 @@ const menuStyles = css`
 `;
 
 const Menu = () => {
-  let lastScrollY = window.scrollY;
+  const lastScrollY = useRef(window.scrollY);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      if (currentScrollY > lastScrollY) {
+      if (currentScrollY > lastScrollY.current) {
         setHidden(true);
       } else {
         setHidden(false);
       }
-      lastScrollY = currentScrollY;
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -82,14 +86,11 @@ const Menu = () => {
 
   return (
     <nav className="main-menu" css={menuStyles}>
-      <a onClick={() => scrollToSection('section-hero')} class="regular-link">Start</a>
-      <a onClick={() => scrollToSection('section-about')} class="regular-link">About</a>
-      <a onClick={() => scrollToSection('section-skills')} class="regular-link">Skills</a>
-      <a onClick={() => scrollToSection('section-portfolio')} class="regular-link">Portfolio</a>
-      <a onClick={() => scrollToSection('section-clients')} class="regular-link">Testimonials</a>
-      <a onClick={() => scrollToSection('section-experience')} class="regular-link">Experience</a>
-      <a onClick={() => scrollToSection('section-education')} class="regular-link">Education</a>
-      <a onClick={() => scrollToSection('section-contact')} class="regular-link">Contact</a>
+      {['section-hero', 'section-about', 'section-skills', 'section-portfolio', 'section-clients', 'section-experience', 'section-education', 'section-contact'].map((section) => (
+        <button key={section} onClick={() => scrollToSection(section)} className="regular-link">
+          {section.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+        </button>
+      ))}
     </nav>
   );
 };
