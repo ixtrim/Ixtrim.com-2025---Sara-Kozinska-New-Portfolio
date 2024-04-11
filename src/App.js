@@ -2,6 +2,7 @@
 import React from 'react';
 import { ThemeProvider, Global, css } from '@emotion/react';
 import theme from './theme';
+import { LanguageProvider } from './contexts/LanguageContext';
 import VideoBackground from './components/layout/VideoBackground';
 import ExternalLinks from './components/layout/ExternalLinks';
 import Languages from './components/layout/Languages';
@@ -48,23 +49,25 @@ const appContainerStyles = css`
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Global styles={globalStyles} />
-      <VideoBackground />
-      <div css={appContainerStyles}>
-        <Languages />
-        <Menu />
-        <Hero />
-        <About />
-        <Skills />
-        <Portfolio />
-        <Clients />
-        <Experience />
-        <Education />
-        <Contact />
-        <Footer />
-        <ExternalLinks />
-        <Cursor />
-      </div>
+      <LanguageProvider>
+        <Global styles={globalStyles} />
+        <VideoBackground />
+        <div css={appContainerStyles}>
+          <Languages />
+          <Menu />
+          <Hero />
+          <About />
+          <Skills />
+          <Portfolio />
+          <Clients />
+          <Experience />
+          <Education />
+          <Contact />
+          <Footer />
+          <ExternalLinks />
+          <Cursor />
+        </div>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }
