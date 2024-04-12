@@ -31,17 +31,17 @@ const Footer = () => {
   const textRef2 = useRef(null);
 
   const footerTexts = {
-  copyright: {
-    ENG: `© ${new Date().getFullYear()} Sara Kozinska Software Developer. All rights reserved.`,
-    ES: `© ${new Date().getFullYear()} Sara Kozinska Desarrolladora de Software. Todos los derechos reservados.`,
-    PL: `© ${new Date().getFullYear()} Sara Kozinska Programistka. Wszelkie prawa zastrzeżone.`
-  },
-  builtWith: {
-    ENG: "Website built with REACT and GSAP, powered by STRAPI.",
-    ES: "Sitio web construido con REACT y GSAP, impulsado por STRAPI.",
-    PL: "Strona zbudowana przy użyciu REACT i GSAP, napędzana przez STRAPI."
-  }
-};
+    copyright: {
+      ENG: `© ${new Date().getFullYear()} Sara Kozinska Software Developer. All rights reserved.`,
+      ES: `© ${new Date().getFullYear()} Sara Kozinska Desarrolladora de Software. Todos los derechos reservados.`,
+      PL: `© ${new Date().getFullYear()} Sara Kozinska Programistka. Wszelkie prawa zastrzeżone.`
+    },
+    builtWith: {
+      ENG: ["Website built with ", " and ", ", powered by "],
+      ES: ["Sitio web construido con ", " y ", ", impulsado por "],
+      PL: ["Strona zbudowana przy użyciu ", " i ", ", treść zarządzana w "]
+    }
+  };
 
   useEffect(() => {
     gsap.timeline()
@@ -53,9 +53,11 @@ const Footer = () => {
     <footer css={footerStyles}>
       <p ref={textRef1}>{footerTexts['copyright'][language]}</p>
       <p ref={textRef2}>
-        {footerTexts['builtWith'][language].substring(0, 17)}
-        <Link href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" variant="white" size="small">REACT</Link> and&nbsp; 
-        <Link href="https://gsap.com/" target="_blank" rel="noopener noreferrer" variant="white" size="small">GSAP</Link>, powered by&nbsp; 
+        {footerTexts['builtWith'][language][0]}
+        <Link href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" variant="white" size="small">REACT</Link>
+        {footerTexts['builtWith'][language][1]}
+        <Link href="https://gsap.com/" target="_blank" rel="noopener noreferrer" variant="white" size="small">GSAP</Link>
+        {footerTexts['builtWith'][language][2]}
         <Link href="https://strapi.io/" target="_blank" rel="noopener noreferrer" variant="white" size="small">STRAPI</Link>.
       </p>
     </footer>
