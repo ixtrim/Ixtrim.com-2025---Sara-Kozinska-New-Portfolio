@@ -56,6 +56,7 @@ const Hero = () => {
       <br /><br />
       <div id="section-hero">
         LOGO
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <h1 ref={textContentRef} className="text-content">{heroTextContent[language]}</h1>
 
       </div>
