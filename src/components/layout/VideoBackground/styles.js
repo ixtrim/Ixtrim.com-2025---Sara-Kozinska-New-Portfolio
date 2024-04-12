@@ -23,6 +23,6 @@ export const VideoContainer = styled.div`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.dark};
     z-index: 1;
-    opacity: 0.9;
+    opacity: 0.8;
   }
 `;

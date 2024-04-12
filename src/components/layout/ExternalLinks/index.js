@@ -58,7 +58,7 @@ const componentStyles = css`
 
   .arrow {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 6px;
     z-index: 1;
     cursor: pointer;
@@ -131,7 +131,7 @@ const ExternalLinks = () => {
           </Link>
         ))}
       </nav>
-      <span className={`arrow ${isAtBottom ? 'arrowUp' : 'arrowDown'}`} onClick={isAtBottom ? scrollToTop : scrollToBottom}></span>
+      <span className={`regular-link arrow ${isAtBottom ? 'arrowUp' : 'arrowDown'}`} onClick={isAtBottom ? scrollToTop : scrollToBottom}></span>
     </div>
   );
 };
