@@ -20,7 +20,7 @@ const Contact = () => {
   return (
     <div css={contactStyles}>
       <div id="section-contact">
-        <h3>Contact Information</h3><br/>
+        <h3>Contact Information</h3><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <p>Clear and easy ways to contact the developer, including email, LinkedIn profile, and other relevant social media or professional networking profiles.</p>
       </div>
     </div>

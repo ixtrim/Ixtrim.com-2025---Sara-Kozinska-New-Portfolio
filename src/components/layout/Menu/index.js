@@ -47,7 +47,8 @@ const menuStyles = css`
     padding: 0;
     margin: 0;
 
-    &:hover {
+    &:hover,
+    &.active {
       color: ${theme.colors.orange};
     }
   }
@@ -57,6 +58,7 @@ const Menu = () => {
   const { language } = useLanguage();
   const lastScrollY = useRef(window.scrollY);
   const [hidden, setHidden] = useState(false);
+  const [activeSection, setActiveSection] = useState('section-hero');
   const menuRefs = useRef([]);
   menuRefs.current = [];
   const addToRefs = (el) => {
@@ -77,23 +79,40 @@ const Menu = () => {
   ];
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.to(menuRefs.current, {
-      opacity: 0,
-      y: -20,
-      stagger: 0.05,
-      duration: 0.2,
-      onComplete: () => {
-        // Animation completed
-      }
-    }).to(menuRefs.current, {
-      opacity: 1,
-      y: 0,
-      stagger: 0.05,
-      duration: 0.5,
-      delay: 0.1
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -30% 0px", threshold: 0.5 }
+    );
+
+    menuItems.forEach(item => {
+      const section = document.getElementById(item.id);
+      if (section) observer.observe(section);
     });
-  }, [language]);
+
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setActiveSection('section-hero');
+      } else if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setActiveSection('section-contact');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      menuItems.forEach(item => {
+        const section = document.getElementById(item.id);
+        if (section) observer.unobserve(section);
+      });
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [menuItems]);
 
   useEffect(() => {
     gsap.to("nav.main-menu", { top: hidden ? "-100px" : "0px", ease: "power2.inOut" });
@@ -114,7 +133,7 @@ const Menu = () => {
           key={item.id}
           ref={addToRefs}
           onClick={() => scrollToSection(item.id)}
-          className="regular-link"
+          className={`regular-link ${activeSection === item.id ? 'active' : ''}`}
         >
           {item.labels[language]}
         </button>
