@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import theme from '@/theme';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -53,24 +54,46 @@ const menuStyles = css`
 `;
 
 const Menu = () => {
+  const { language } = useLanguage();
   const lastScrollY = useRef(window.scrollY);
   const [hidden, setHidden] = useState(false);
+  const menuRefs = useRef([]);
+  menuRefs.current = [];
+  const addToRefs = (el) => {
+    if (el && !menuRefs.current.includes(el)) {
+      menuRefs.current.push(el);
+    }
+  };
+
+  const menuItems = [
+    { id: 'section-hero', labels: { ENG: "Start", ES: "Inicio", PL: "Start" } },
+    { id: 'section-about', labels: { ENG: "About", ES: "Acerca de", PL: "O mnie" } },
+    { id: 'section-skills', labels: { ENG: "Skills", ES: "Habilidades", PL: "Umiejętności" } },
+    { id: 'section-portfolio', labels: { ENG: "Portfolio", ES: "Portafolio", PL: "Portfolio" } },
+    { id: 'section-clients', labels: { ENG: "Testimonials", ES: "Testimonios", PL: "Referencje" } },
+    { id: 'section-experience', labels: { ENG: "Experience", ES: "Experiencia", PL: "Doświadczenie" } },
+    { id: 'section-education', labels: { ENG: "Education", ES: "Educación", PL: "Edukacja" } },
+    { id: 'section-contact', labels: { ENG: "Contact", ES: "Contacto", PL: "Kontakt" } },
+  ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY.current) {
-        setHidden(true);
-      } else {
-        setHidden(false);
+    const tl = gsap.timeline();
+    tl.to(menuRefs.current, {
+      opacity: 0,
+      y: -20,
+      stagger: 0.05,
+      duration: 0.2,
+      onComplete: () => {
+        // Animation completed
       }
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    }).to(menuRefs.current, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.05,
+      duration: 0.5,
+      delay: 0.1
+    });
+  }, [language]);
 
   useEffect(() => {
     gsap.to("nav.main-menu", { top: hidden ? "-100px" : "0px", ease: "power2.inOut" });
@@ -86,9 +109,14 @@ const Menu = () => {
 
   return (
     <nav className="main-menu" css={menuStyles}>
-      {['section-hero', 'section-about', 'section-skills', 'section-portfolio', 'section-clients', 'section-experience', 'section-education', 'section-contact'].map((section) => (
-        <button key={section} onClick={() => scrollToSection(section)} className="regular-link">
-          {section.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+      {menuItems.map((item, index) => (
+        <button
+          key={item.id}
+          ref={addToRefs}
+          onClick={() => scrollToSection(item.id)}
+          className="regular-link"
+        >
+          {item.labels[language]}
         </button>
       ))}
     </nav>

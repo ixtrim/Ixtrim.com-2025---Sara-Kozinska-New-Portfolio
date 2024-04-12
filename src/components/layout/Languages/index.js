@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
 import { gsap } from 'gsap';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const languagesStyles = css`
   position: fixed;
@@ -35,30 +36,15 @@ const languagesStyles = css`
   }
 `;
 
-const Languages = ({ onLanguageChange }) => {
-  const [activeLanguage, setActiveLanguage] = useState('ENG');
-
-  useEffect(() => {
-    // Assuming you have elements to animate when language changes
-    // For demonstration, let's say they have the class 'text-content'
-    const textContents = document.querySelectorAll('.text-content');
-    gsap.fromTo(textContents, 
-      { opacity: 0, y: -20 }, 
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' }
-    );
-  }, [activeLanguage]);
-
-  const handleLanguageChange = (language) => {
-    setActiveLanguage(language);
-    onLanguageChange(language); // Propagate the change to parent component or context
-  };
+const Languages = () => {
+  const { language, handleLanguageChange } = useLanguage();
 
   return (
     <nav css={languagesStyles}>
       <ul>
-        <li className={`regular-link ${activeLanguage === 'ENG' ? 'active' : ''}`} onClick={() => handleLanguageChange('ENG')}>ENG</li>
-        <li className={`regular-link ${activeLanguage === 'ES' ? 'active' : ''}`} onClick={() => handleLanguageChange('ES')}>ES</li>
-        <li className={`regular-link ${activeLanguage === 'PL' ? 'active' : ''}`} onClick={() => handleLanguageChange('PL')}>PL</li>
+        <li className={`regular-link ${language === 'ENG' ? 'active' : ''}`} onClick={() => handleLanguageChange('ENG')}>ENG</li>
+        <li className={`regular-link ${language === 'ES' ? 'active' : ''}`} onClick={() => handleLanguageChange('ES')}>ES</li>
+        <li className={`regular-link ${language === 'PL' ? 'active' : ''}`} onClick={() => handleLanguageChange('PL')}>PL</li>
       </ul>
     </nav>
   );
