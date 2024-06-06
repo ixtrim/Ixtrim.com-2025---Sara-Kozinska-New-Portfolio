@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemeProvider, Global, css } from '@emotion/react';
 import theme from './theme';
 import { LanguageProvider } from './contexts/LanguageContext';
-import VideoBackground from './components/layout/VideoBackground';
+import Background from './components/layout/Background';
 import ExternalLinks from './components/layout/ExternalLinks';
 import Languages from './components/layout/Languages';
 import Menu from './components/layout/Menu';
@@ -51,7 +51,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <LanguageProvider>
         <Global styles={globalStyles} />
-        <VideoBackground />
+        <Background />
         <div css={appContainerStyles}>
           <Languages />
           <Menu />

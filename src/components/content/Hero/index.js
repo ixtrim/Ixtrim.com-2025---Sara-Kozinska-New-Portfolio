@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import theme from '@/theme';
 import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
+import logo from '../../../assets/images/logo.svg';  // Ensure the path is correct
 
 gsap.registerPlugin(SplitText);
 
@@ -35,11 +36,9 @@ const Hero = () => {
     PL: "Programista",
   };
 
-  // Ref for the text content to apply animation
   const textContentRef = useRef(null);
 
   useEffect(() => {
-    // Ensure the DOM element is available and prevent re-animating on initial render
     if (textContentRef.current) {
       const split = new SplitText(textContentRef.current, { type: "chars, words, lines" });
       const timeline = gsap.timeline();
@@ -55,10 +54,11 @@ const Hero = () => {
     <div css={contentStyles}>
       <br /><br />
       <div id="section-hero">
-        LOGO
+        <img src={logo} alt="Company Logo" style={{ maxWidth: '75px' }} />
+        
+        <p></p>
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <h1 ref={textContentRef} className="text-content">{heroTextContent[language]}</h1>
-
       </div>
       {/* Example language switcher buttons */}
       <button onClick={() => setLanguage('ENG')}>ENG</button>
