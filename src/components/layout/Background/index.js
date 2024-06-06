@@ -30,12 +30,13 @@ const Background = () => {
         events: {
           onClick: {
             enable: true,
-            mode: "push",
+            mode: ["push", "repulse"],
           },
           onHover: {
             enable: true,
-            mode: "repulse",
+            mode: ["grab", "bubble"],
           },
+          resize: true,
         },
         modes: {
           push: {
@@ -45,11 +46,24 @@ const Background = () => {
             distance: 200,
             duration: 0.4,
           },
+          grab: {
+            distance: 200,
+            line_linked: {
+              opacity: 0.35,
+            },
+          },
+          bubble: {
+            distance: 200,
+            size: 10,
+            duration: 2,
+            opacity: 0.8,
+            speed: 3,
+          },
         },
       },
       particles: {
         color: {
-          value: "#ffffff",
+          value: ["#ffffff", "#fdb32b"],
         },
         links: {
           color: "#ffffff",
@@ -58,6 +72,9 @@ const Background = () => {
           opacity: 0.5,
           width: 1,
         },
+        collisions: {
+          enable: true,
+        },
         move: {
           direction: "none",
           enable: true,
@@ -65,24 +82,45 @@ const Background = () => {
             default: "bounce",
           },
           random: false,
-          speed: 2,
+          speed: 3,
           straight: false,
+          warp: true,
+          attract: {
+            enable: true,
+            rotateX: 600,
+            rotateY: 1200,
+          },
         },
         number: {
           density: {
             enable: true,
             area: 800,
           },
-          value: 80,
+          value: 100,
         },
         opacity: {
-          value: 0.5,
+          value: 0.7,
         },
         shape: {
-          type: "circle",
+          type: ["circle", "triangle", "polygon"],
+          polygon: {
+            nb_sides: 5,
+          },
         },
         size: {
-          value: { min: 1, max: 5 },
+          value: { min: 3, max: 7 },
+        },
+        twinkle: {
+          particles: {
+            enable: true,
+            frequency: 0.05,
+            opacity: 1,
+          },
+        },
+        shadow: {
+          enable: true,
+          color: "#000000",
+          blur: 5,
         },
       },
       detectRetina: true,
