@@ -38,6 +38,7 @@ const menuStyles = css`
     cursor: pointer;
     color: ${theme.colors.white};
     text-transform: uppercase;
+    font-family: ${theme.fonts.body};
     font-size: ${theme.linkSizes.small.fontSize};
     letter-spacing: 0.35em;
     text-decoration: none;

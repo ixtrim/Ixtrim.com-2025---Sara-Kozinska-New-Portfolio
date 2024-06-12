@@ -19,6 +19,8 @@ import Footer from './components/layout/Footer';
 import Cursor from './components/layout/Cursor';
 
 const globalStyles = css`
+  @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&family=Lancelot&display=swap');
+
   body {
     font-family: ${theme.fonts.body};
     font-size: ${theme.fontSizes.base};
@@ -27,6 +29,11 @@ const globalStyles = css`
     background-color: ${theme.colors.dark};
     color: ${theme.colors.white};
     overflow-x: hidden;
+
+    & > *,
+    & > button {
+      font-family: ${theme.fonts.body};
+    }
   }
 `;
 

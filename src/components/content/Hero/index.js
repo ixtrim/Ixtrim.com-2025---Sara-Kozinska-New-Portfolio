@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import theme from '@/theme';
 import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
-import logo from '../../../assets/images/logo.svg';  // Ensure the path is correct
+import Logo from './Logo'; // Adjust the import path as necessary
 
 gsap.registerPlugin(SplitText);
 
@@ -12,28 +12,63 @@ const contentStyles = css`
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0;
-  text-align: justify;
+  padding: 100px 0 0 0;
+  text-align: left;
   color: ${theme.colors.white};
 
-  & > div {
-    margin: 100px 0;
+  .branding {
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+  
+    svg {
+      margin: 0 auto;
+      display: inline-block;
+      vertica-align: middle;
+    }
+
+    .first-name {
+      position: absolute;
+      bottom: 5px;
+      left: 29px;
+      display: inline-block;
+      font-size: ${theme.fontSizes.small};
+      color: ${theme.colors.orange};
+    }
+
+    .last-name {
+      position: absolute;
+      bottom: 20px;
+      left: 116px;
+      display: inline-block;
+      font-size: ${theme.fontSizes.small};
+      color: ${theme.colors.orange};
+    }
+
+    .first-name,
+    .last-name {
+      &::first-letter {
+        opacity: 0;
+      }
+    }
   }
 
   .text-content {
     font-size: 14px;
     font-weight: 300;
     line-height: 1.5em;
-    opacity: 0; // Start with text content hidden
   }
 `;
 
 const Hero = () => {
   const [language, setLanguage] = useState('ENG');
   const heroTextContent = {
-    ENG: "Software Developer",
-    ES: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-    PL: "Programista",
+    ENG: "I am Sara, a software developer based in Barcelona. Welcome on my website!",
+    ES: "Soy Sara, una desarrolladora de software afincada en Barcelona. ¡Bienvenidos a mi sitio web!",
+    PL: "Jestem Sara, software developer osadzona w Barcelonie. Witaj na mojej stronie internetowej!",
   };
 
   const textContentRef = useRef(null);
@@ -51,19 +86,13 @@ const Hero = () => {
   }, [language]);
 
   return (
-    <div css={contentStyles}>
-      <br /><br />
-      <div id="section-hero">
-        <img src={logo} alt="Company Logo" style={{ maxWidth: '75px' }} />
-        
-        <p></p>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div id="section-hero" css={contentStyles}>
+      <div className="branding">
+          <Logo />
+          <span className="first-name">Sara</span>
+          <span className="last-name">Kozińska</span>
+        </div>
         <h1 ref={textContentRef} className="text-content">{heroTextContent[language]}</h1>
-      </div>
-      {/* Example language switcher buttons */}
-      <button onClick={() => setLanguage('ENG')}>ENG</button>
-      <button onClick={() => setLanguage('ES')}>ES</button>
-      <button onClick={() => setLanguage('PL')}>PL</button>
     </div>
   );
 };
