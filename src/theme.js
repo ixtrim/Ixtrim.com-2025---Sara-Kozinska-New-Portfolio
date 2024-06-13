@@ -9,7 +9,7 @@ const theme = {
   },
   fonts: {
     body: "'Public Sans', sans-serif",
-    heading: "'Lancelot', cursive",
+    heading: "'Bebas Neue', sans-serif",
   },
   fontSizes: {
     base: '14px',
@@ -19,6 +19,7 @@ const theme = {
     large: '1.5rem',
     xlarge: '2rem',
     xxlarge: '3rem',
+    xxxlarge: '5rem',
   },
   fontWeights: {
     normal: 400, 
