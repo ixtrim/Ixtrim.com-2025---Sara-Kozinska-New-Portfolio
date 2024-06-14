@@ -33,6 +33,24 @@ const theme = {
     md: '990px',
     lg: '1200px',
   },
+  spaces: {
+    largeDesktop: {
+      section: '175px',
+      elements: '100px',
+    },
+    normalDesktop: {
+      section: '150px',
+    },
+    smallDesktop: {
+      section: '125px',
+    },
+    regularTablet: {
+      section: '100px',
+    },
+    regularSmartphone: {
+      section: '75px',
+    },
+  },
   buttonSizes: {
     small: {
       padding: '8px 12px',

@@ -11,14 +11,14 @@ gsap.registerPlugin(SplitText);
 const contentStyles = css`
   width: 90%;
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 100px 0 0 0;
+  margin: 0 auto ${theme.spaces.largeDesktop.section};
+  padding: ${theme.spaces.largeDesktop.elements} 0 0 0;
   text-align: left;
   color: ${theme.colors.white};
 
   .branding {
     width: 150px;
-    margin: 0 0 50px;
+    margin: 0;
     padding: 0;
     position: relative;
     text-align: center;
@@ -64,7 +64,7 @@ const contentStyles = css`
       line-height: 1.2;
       color: ${theme.colors.orange};
       letter-spacing: 1px;
-      margin: 0;
+      margin: ${theme.spaces.largeDesktop.elements} 0 0 0;
       padding: 0;
       position: relative;
     }
@@ -91,7 +91,7 @@ const contentStyles = css`
       font-family: ${theme.fonts.heading};
       font-size: ${theme.fontSizes.xlarge};
       line-height: 1.2;
-      color: ${theme.colors.red};
+      color: ${theme.colors.orange};
       letter-spacing: 1px;
       margin: 0;
       padding: 0;
@@ -118,7 +118,7 @@ const Hero = () => {
       
       timeline.set(textContentRef.current, { perspective: 400 })
         .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
-        .to(split.words, { duration: 0.1, color: "#ed1d23", scale: 0.9, stagger: 0.1 }, "words")
+        .to(split.words, { duration: 0.1, color: "#5b5b5c", scale: 0.9, stagger: 0.1 }, "words")
         .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
     }
   }, [language]);
@@ -133,8 +133,6 @@ const Hero = () => {
         <span className="branding__welcome">Hello!</span>
         <h1 ref={textContentRef} className="branding__introduction">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
         <span className="branding__invitation">I am happy to welcome you on my website!</span>
-
-        <p>{heroTextContent[language]}</p>
     </div>
   );
 };
