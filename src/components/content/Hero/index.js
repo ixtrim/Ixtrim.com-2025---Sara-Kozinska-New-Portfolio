@@ -22,82 +22,109 @@ const contentStyles = css`
     padding: 0;
     position: relative;
     text-align: center;
+    transition: opacity 0.3s ease-in-out;
     z-index: 2;
-  
+
     svg {
       margin: 0 auto;
       display: inline-block;
-      vertica-align: middle;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      animation: pulse 3s ease-in-out infinite;
     }
 
     &__first-name {
       position: absolute;
-      bottom: 5px;
-      left: 29px;
+      bottom: 0px;
+      left: 30px;
       display: inline-block;
       font-size: ${theme.fontSizes.small};
       color: ${theme.colors.orange};
+      
+      &::first-letter {
+        opacity: 0;
+      }
     }
 
     &__last-name {
       position: absolute;
-      bottom: 20px;
-      left: 116px;
+      bottom: 15px;
+      left: 118px;
       display: inline-block;
       font-size: ${theme.fontSizes.small};
       color: ${theme.colors.orange};
-    }
-
-    &__first-name,
-    &__last-name {
+      
       &::first-letter {
         opacity: 0;
       }
     }
 
     &__welcome {
-      width: 100%;
-      text-align: center;
+      position: relative;
       display: inline-block;
+      width: 100%;
+      margin: ${theme.spaces.largeDesktop.elements} 0 0 0;
+      padding: 0;
+      text-align: center;
       font-family: ${theme.fonts.heading};
       font-size: ${theme.fontSizes.xxlarge};
       line-height: 1.2;
       color: ${theme.colors.orange};
       letter-spacing: 1px;
-      margin: calc(${theme.spaces.largeDesktop.elements} / 2) 0 0 0;
-      padding: 0;
-      position: relative;
     }
 
     &__introduction {
-      width: 100%;
-      text-align: center;
+      position: relative;
       display: inline-block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
       font-family: ${theme.fonts.heading};
       font-size: ${theme.fontSizes.xxxlarge};
       font-weight: ${theme.fontWeights.normal};
       line-height: 1.2;
       color: ${theme.colors.white};
       letter-spacing: 1px;
-      margin: 0;
-      padding: 0;
-      position: relative;
     }
 
     &__invitation {
-      width: 100%;
-      text-align: center;
+      position: relative;
       display: inline-block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
       font-family: ${theme.fonts.heading};
       font-size: ${theme.fontSizes.xlarge};
       line-height: 1.2;
       color: ${theme.colors.orange};
       letter-spacing: 1px;
-      margin: 0;
-      padding: 0;
-      position: relative;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    
+    25% {
+      opacity: .75;
     }
 
+    50% {
+      opacity: .9;
+    }
+
+    75% {
+      opacity: .75;
+    }
+    
+    100% {
+      opacity: 1;
+    }
   }
 `;
 
@@ -126,7 +153,7 @@ const Hero = () => {
             .to(split.words, { duration: 0.1, color: "#fdb32b", scale: 0.9, stagger: 0.1 }, "words")
             .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
         }
-      }, 3000); // 3 seconds
+      }, 3000);
       setHoverTimer(timer);
     } else if (hoverTimer) {
       clearTimeout(hoverTimer);
@@ -161,7 +188,7 @@ const Hero = () => {
         <span className="branding__last-name">Kozińska</span>
       </div>
       <span className="branding__welcome">Hello!</span>
-      <h1 ref={textContentRef} className="branding__introduction">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
+      <h1 ref={textContentRef} className="branding__introduction regular-link">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
       <span className="branding__invitation">I am happy to welcome you on my website!</span>
     </div>
   );
