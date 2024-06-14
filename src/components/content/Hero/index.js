@@ -64,7 +64,7 @@ const contentStyles = css`
       line-height: 1.2;
       color: ${theme.colors.orange};
       letter-spacing: 1px;
-      margin: ${theme.spaces.largeDesktop.elements} 0 0 0;
+      margin: calc(${theme.spaces.largeDesktop.elements} / 2) 0 0 0;
       padding: 0;
       position: relative;
     }
@@ -77,7 +77,7 @@ const contentStyles = css`
       font-size: ${theme.fontSizes.xxxlarge};
       font-weight: ${theme.fontWeights.normal};
       line-height: 1.2;
-      color: ${theme.colors.orange};
+      color: ${theme.colors.white};
       letter-spacing: 1px;
       margin: 0;
       padding: 0;
@@ -103,6 +103,8 @@ const contentStyles = css`
 
 const Hero = () => {
   const [language, setLanguage] = useState('ENG');
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoverTimer, setHoverTimer] = useState(null);
   const heroTextContent = {
     ENG: "Hello!/nI am Sara, a software developer based in Barcelona. Welcome on my website!",
     ES: "Soy Sara, una desarrolladora de software afincada en Barcelona. ¡Bienvenidos a mi sitio web!",
@@ -112,27 +114,55 @@ const Hero = () => {
   const textContentRef = useRef(null);
 
   useEffect(() => {
-    if (textContentRef.current) {
-      const split = new SplitText(textContentRef.current, { type: "chars, words, lines" });
-      const timeline = gsap.timeline();
-      
-      timeline.set(textContentRef.current, { perspective: 400 })
-        .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
-        .to(split.words, { duration: 0.1, color: "#5b5b5c", scale: 0.9, stagger: 0.1 }, "words")
-        .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
+    let timer;
+    if (isHovered) {
+      timer = setTimeout(() => {
+        if (textContentRef.current) {
+          const split = new SplitText(textContentRef.current, { type: "chars, words, lines" });
+          const timeline = gsap.timeline();
+          
+          timeline.set(textContentRef.current, { perspective: 400 })
+            .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
+            .to(split.words, { duration: 0.1, color: "#fdb32b", scale: 0.9, stagger: 0.1 }, "words")
+            .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
+        }
+      }, 3000); // 3 seconds
+      setHoverTimer(timer);
+    } else if (hoverTimer) {
+      clearTimeout(hoverTimer);
     }
-  }, [language]);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isHovered, language]);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (hoverTimer) {
+      clearTimeout(hoverTimer);
+    }
+  };
 
   return (
-    <div id="section-hero" css={contentStyles}>
+    <div 
+      id="section-hero" 
+      css={contentStyles} 
+      onMouseEnter={handleMouseEnter} 
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="branding">
-          <Logo />
-          <span className="branding__first-name">Sara</span>
-          <span className="branding__last-name">Kozińska</span>
-        </div>
-        <span className="branding__welcome">Hello!</span>
-        <h1 ref={textContentRef} className="branding__introduction">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
-        <span className="branding__invitation">I am happy to welcome you on my website!</span>
+        <Logo />
+        <span className="branding__first-name">Sara</span>
+        <span className="branding__last-name">Kozińska</span>
+      </div>
+      <span className="branding__welcome">Hello!</span>
+      <h1 ref={textContentRef} className="branding__introduction">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
+      <span className="branding__invitation">I am happy to welcome you on my website!</span>
     </div>
   );
 };
