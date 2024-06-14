@@ -110,16 +110,8 @@ const contentStyles = css`
       opacity: 1;
     }
     
-    25% {
-      opacity: .75;
-    }
-
     50% {
-      opacity: .9;
-    }
-
-    75% {
-      opacity: .75;
+      opacity: .65;
     }
     
     100% {
@@ -150,7 +142,7 @@ const Hero = () => {
           
           timeline.set(textContentRef.current, { perspective: 400 })
             .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
-            .to(split.words, { duration: 0.1, color: "#fdb32b", scale: 0.9, stagger: 0.1 }, "words")
+            .to(split.words, { duration: 0.1, color: "#fdb32c", scale: 0.9, stagger: 0.1 }, "words")
             .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
         }
       }, 3000);
@@ -187,7 +179,7 @@ const Hero = () => {
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
-      <span className="branding__welcome">Hello!</span>
+      <span className="branding__welcome" onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>Hello!</span>
       <h1 ref={textContentRef} className="branding__introduction regular-link">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
       <span className="branding__invitation">I am happy to welcome you on my website!</span>
     </div>
