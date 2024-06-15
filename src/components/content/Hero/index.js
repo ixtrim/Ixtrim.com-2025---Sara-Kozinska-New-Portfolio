@@ -4,7 +4,8 @@ import { css } from '@emotion/react';
 import theme from '@/theme';
 import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
-import Logo from './Logo'; // Adjust the import path as necessary
+import Logo from './Logo';
+import CubeButton from '../../common/CubeButton';
 
 gsap.registerPlugin(SplitText);
 
@@ -106,50 +107,73 @@ const contentStyles = css`
   }
 
   figure.cube-btn {
-    width: 200px;
-    height: 60px;
+    width: 150px;
+    height: 50px;
     cursor: pointer;
     perspective: 500px;
-  }
-figure.cube-btn div {
-  height: 100%;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-  transition: 0.25s;
-  -webkit-transition: 0.25s;
-}
-figure.cube-btn:hover div {
-  transform: rotateX(-90deg);
-}
-figure.cube-btn span {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  box-sizing: border-box;
-  border: 1px solid #fff;
-  font-family: "Source Sans Pro", sans-serif;
-  line-height: 50px;
-  font-size: 17pt;
-  text-align: center;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
-}
-figure.cube-btn span:nth-child(1) {
-  color: #fff;
-  transform: translate3d(0, 0, 30px);
-  -webkit-transform: translate3d(0, 0, 30px);
-}
-figure.cube-btn span:nth-child(2) {
-  color: $color;
-  background: red;
-  transform: rotateX(90deg) translate3d(0, 0, 30px);
-  -webkit-transform: rotateX(90deg) translate3d(0, 0, 30px);
-  opacity: 0;
-}
+    margin: 0;
+    padding: 0;
+    display: inline-block;
 
-figure.cube-btn:hover span:nth-child(2) {
-  opacity: 1;
-}
+    div {
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: 0.25s;
+    }
+
+    span {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      box-sizing: border-box;
+      border: 2px solid ${theme.colors.grey};
+      font-family: ${theme.fonts.heading};
+      line-height: 50px;
+      font-size: 17pt;
+      text-align: center;
+      text-transform: uppercase;
+      transition: all 0.3s ease-in-out;
+
+      &:nth-child(1) {
+        color: #fff;
+        transform: translate3d(0, 0, 30px);
+      }
+
+      &:nth-child(2) {
+        color: $color;
+        border: 2px solid ${theme.colors.orange};
+        background: ${theme.colors.orange};
+        transform: rotateX(90deg) translate3d(0, 0, 30px);
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      div {
+        transform: rotateX(-90deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 1;
+      }
+    }
+  }
+
+  ul {
+    width: 100%;
+    margin: calc(${theme.spaces.largeDesktop.elements}/2) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: calc(${theme.spaces.largeDesktop.elements}/2);
+    list-style-type: none;
+
+    a,
+    & > * {
+      font-family: ${theme.fonts.heading};
+    }
+  }
 
   @keyframes pulse {
     0% {
@@ -228,12 +252,15 @@ const Hero = () => {
       <span className="welcome" onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>Hello!</span>
       <h1 ref={textContentRef} className="introduction regular-link">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
       <span className="invitation">I am happy to welcome you on my website!</span>
-      <figure class="cube-btn">
-        <div>
-          <span>Hover Me</span>
-          <span>Button</span>
-        </div>
-      </figure>
+      <ul>
+        <li>
+          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
+        </li>
+        <li>
+          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full regular-link" />
+        </li>
+      </ul>
+      
     </div>
   );
 };
