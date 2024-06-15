@@ -60,50 +60,96 @@ const contentStyles = css`
         opacity: 0;
       }
     }
-
-    &__welcome {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      margin: ${theme.spaces.largeDesktop.elements} 0 0 0;
-      padding: 0;
-      text-align: center;
-      font-family: ${theme.fonts.heading};
-      font-size: ${theme.fontSizes.xxlarge};
-      line-height: 1.2;
-      color: ${theme.colors.orange};
-      letter-spacing: 1px;
-    }
-
-    &__introduction {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      font-family: ${theme.fonts.heading};
-      font-size: ${theme.fontSizes.xxxlarge};
-      font-weight: ${theme.fontWeights.normal};
-      line-height: 1.2;
-      color: ${theme.colors.white};
-      letter-spacing: 1px;
-    }
-
-    &__invitation {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      font-family: ${theme.fonts.heading};
-      font-size: ${theme.fontSizes.xlarge};
-      line-height: 1.2;
-      color: ${theme.colors.orange};
-      letter-spacing: 1px;
-    }
   }
+
+  .welcome {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: ${theme.spaces.largeDesktop.elements} 0 0 0;
+    padding: 0;
+    text-align: center;
+    font-family: ${theme.fonts.heading};
+    font-size: ${theme.fontSizes.xxlarge};
+    line-height: 1.2;
+    color: ${theme.colors.orange};
+    letter-spacing: 1px;
+  }
+
+  .introduction {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: ${theme.fonts.heading};
+    font-size: ${theme.fontSizes.xxxlarge};
+    font-weight: ${theme.fontWeights.normal};
+    line-height: 1.2;
+    color: ${theme.colors.white};
+    letter-spacing: 1px;
+  }
+
+  .invitation {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: ${theme.fonts.heading};
+    font-size: ${theme.fontSizes.xlarge};
+    line-height: 1.2;
+    color: ${theme.colors.orange};
+    letter-spacing: 1px;
+  }
+
+  figure.cube-btn {
+    width: 200px;
+    height: 60px;
+    cursor: pointer;
+    perspective: 500px;
+  }
+figure.cube-btn div {
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: 0.25s;
+  -webkit-transition: 0.25s;
+}
+figure.cube-btn:hover div {
+  transform: rotateX(-90deg);
+}
+figure.cube-btn span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  font-family: "Source Sans Pro", sans-serif;
+  line-height: 50px;
+  font-size: 17pt;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+}
+figure.cube-btn span:nth-child(1) {
+  color: #fff;
+  transform: translate3d(0, 0, 30px);
+  -webkit-transform: translate3d(0, 0, 30px);
+}
+figure.cube-btn span:nth-child(2) {
+  color: $color;
+  background: red;
+  transform: rotateX(90deg) translate3d(0, 0, 30px);
+  -webkit-transform: rotateX(90deg) translate3d(0, 0, 30px);
+  opacity: 0;
+}
+
+figure.cube-btn:hover span:nth-child(2) {
+  opacity: 1;
+}
 
   @keyframes pulse {
     0% {
@@ -179,9 +225,15 @@ const Hero = () => {
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
-      <span className="branding__welcome" onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>Hello!</span>
-      <h1 ref={textContentRef} className="branding__introduction regular-link">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
-      <span className="branding__invitation">I am happy to welcome you on my website!</span>
+      <span className="welcome" onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>Hello!</span>
+      <h1 ref={textContentRef} className="introduction regular-link">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
+      <span className="invitation">I am happy to welcome you on my website!</span>
+      <figure class="cube-btn">
+        <div>
+          <span>Hover Me</span>
+          <span>Button</span>
+        </div>
+      </figure>
     </div>
   );
 };
