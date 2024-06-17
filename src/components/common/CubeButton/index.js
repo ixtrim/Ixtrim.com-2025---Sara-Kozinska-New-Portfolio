@@ -9,7 +9,7 @@ const CubeButton = ({
   linkTarget = "_self",
 }) => {
   return (
-    <CubeButtonWrapper href={linkValue} target={linkTarget} className={variant}>
+    <CubeButtonWrapper href={linkValue} target={linkTarget} className={`${variant} regular-link`}>
       <div>
         <span>{textOne}</span>
         <span>{textTwo}</span>

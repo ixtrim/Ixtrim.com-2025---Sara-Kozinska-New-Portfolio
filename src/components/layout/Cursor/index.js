@@ -35,7 +35,6 @@ const cursorStyles = css`
     pointer-events: none;
     z-index: 9999;
   }
-  
 `;
 
 const Cursor = () => {
@@ -71,24 +70,29 @@ const Cursor = () => {
       circle.position = new paper.Point(lastX, lastY);
     };
 
-    document.body.addEventListener('mouseover', (e) => {
-      if (e.target.matches('.regular-link')) {
+    const handleMouseOver = (e) => {
+      if (e.target.closest('.regular-link')) {
         cursorSmall.classList.add('hovered');
         circle.strokeColor = theme.colors.red;
         circle.strokeWidth = 1;
       }
-    });
-  
-    document.body.addEventListener('mouseout', (e) => {
-      if (e.target.matches('.regular-link')) {
+    };
+
+    const handleMouseOut = (e) => {
+      if (e.target.closest('.regular-link')) {
         cursorSmall.classList.remove('hovered');
         circle.strokeColor = theme.colors.orange;
         circle.strokeWidth = 1;
       }
-    });
+    };
+
+    document.body.addEventListener('mouseover', handleMouseOver);
+    document.body.addEventListener('mouseout', handleMouseOut);
 
     return () => {
       paper.view.onFrame = null;
+      document.body.removeEventListener('mouseover', handleMouseOver);
+      document.body.removeEventListener('mouseout', handleMouseOut);
     };
   }, []);
 

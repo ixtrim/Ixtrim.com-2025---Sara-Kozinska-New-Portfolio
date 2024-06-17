@@ -245,7 +245,7 @@ const Hero = () => {
       onMouseLeave={handleMouseLeave}
     >
       <div className="branding">
-        <Logo />
+        <Logo className="regular-link" />
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
@@ -254,10 +254,10 @@ const Hero = () => {
       <span className="invitation">I am happy to welcome you on my website!</span>
       <ul>
         <li>
-          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
+          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard" />
         </li>
         <li>
-          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full regular-link" />
+          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full" />
         </li>
       </ul>
       
