@@ -6,6 +6,7 @@ import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
 import Logo from './Logo';
 import CubeButton from '../../common/CubeButton';
+import { fetchContent } from '../../../api';
 
 gsap.registerPlugin(SplitText);
 
