@@ -6,7 +6,6 @@ import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
 import Logo from './Logo';
 import CubeButton from '../../common/CubeButton';
-import { fetchContent } from '../../../api';
 
 gsap.registerPlugin(SplitText);
 
@@ -225,7 +224,7 @@ const Hero = () => {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [isHovered, language]);
+  }, [isHovered, language, hoverTimer]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -241,27 +240,26 @@ const Hero = () => {
   return (
     <div 
       id="section-hero" 
-      css={contentStyles} 
-      onMouseEnter={handleMouseEnter} 
-      onMouseLeave={handleMouseLeave}
+      css={contentStyles}
     >
       <div className="branding">
         <Logo className="regular-link" />
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
-      <span className="welcome" onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>Hello!</span>
-      <h1 ref={textContentRef} className="introduction regular-link">My name is Sara Kozińska, a remote software developer based on the sunny side of the world.</h1>
+      <span className="welcome">Hello!</span>
+      <h1 ref={textContentRef} className="introduction regular-link" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        My name is Sara Kozińska, a remote software developer based on the sunny side of the world.
+      </h1>
       <span className="invitation">I am happy to welcome you on my website!</span>
       <ul>
         <li>
-          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard" />
+          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
         </li>
         <li>
-          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full" />
+          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full regular-link" />
         </li>
       </ul>
-      
     </div>
   );
 };
