@@ -19,7 +19,7 @@ import Footer from './components/layout/Footer';
 import Cursor from './components/layout/Cursor';
 
 const globalStyles = css`
-  @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&family=Lancelot&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
   body {
     font-family: ${theme.fonts.body};

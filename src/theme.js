@@ -9,7 +9,7 @@ const theme = {
   },
   fonts: {
     body: "'Public Sans', sans-serif",
-    heading: "'Lancelot', cursive",
+    heading: "'Bebas Neue', sans-serif",
   },
   fontSizes: {
     base: '14px',
@@ -19,6 +19,7 @@ const theme = {
     large: '1.5rem',
     xlarge: '2rem',
     xxlarge: '3rem',
+    xxxlarge: '5rem',
   },
   fontWeights: {
     normal: 400, 
@@ -31,6 +32,24 @@ const theme = {
     sm: '768px',
     md: '990px',
     lg: '1200px',
+  },
+  spaces: {
+    largeDesktop: {
+      section: '175px',
+      elements: '100px',
+    },
+    normalDesktop: {
+      section: '150px',
+    },
+    smallDesktop: {
+      section: '125px',
+    },
+    regularTablet: {
+      section: '100px',
+    },
+    regularSmartphone: {
+      section: '75px',
+    },
   },
   buttonSizes: {
     small: {

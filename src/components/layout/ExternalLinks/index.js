@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../../theme';
 import Link from '../../../components/common/Link';
@@ -80,23 +80,18 @@ const componentStyles = css`
   }
 `;
 
+const menuItems = [
+  { id: 1, name: 'Linked In', URL: 'https://www.linkedin.com/in/sara-kozinska/' },
+  { id: 2, name: 'GitHub', URL: 'https://github.com/ixtrim' },
+  { id: 3, name: 'GitLab', URL: 'https://gitlab.com/ixtrim' },
+  { id: 4, name: 'Hacker Rank', URL: 'https://www.hackerrank.com/' },
+  { id: 5, name: 'Leet Code', URL: 'https://leetcode.com/' },
+];
+
 const ExternalLinks = () => {
-  const [menuItems, setMenuItems] = useState([]);
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
-    const fetchMenuItems = async () => {
-      try {
-        const response = await fetch('http://localhost:1337/api/external-links');
-        const data = await response.json();
-        setMenuItems(data.data);
-      } catch (error) {
-        console.error('Failed to fetch menu items:', error);
-      }
-    };
-
-    fetchMenuItems();
-
     const handleScroll = () => {
       const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
       setIsAtBottom(scrolledToBottom);
@@ -120,14 +115,14 @@ const ExternalLinks = () => {
         {menuItems.map((item) => (
           <Link
             key={item.id}
-            href={item.attributes.URL}
+            href={item.URL}
             target="_blank"
             rel="noopener noreferrer"
             variant="grey"
             size="small"
             css={css`margin-right: 10px;`}
           >
-            {item.attributes.Title}
+            {item.name}
           </Link>
         ))}
       </nav>

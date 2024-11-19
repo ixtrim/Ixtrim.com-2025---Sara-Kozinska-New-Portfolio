@@ -1,0 +1,7 @@
+{
+  "greeting": "Siemka, witaj na moim portfolio",
+  "projects": [
+    { "id": 1, "title": "Project 1", "description": "Description of Project 1" },
+    { "id": 2, "title": "Project 2", "description": "Description of Project 2" }
+  ]
+}
