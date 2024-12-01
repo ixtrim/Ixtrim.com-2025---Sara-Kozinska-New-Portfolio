@@ -6,6 +6,7 @@ import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
 import Logo from './Logo';
 import CubeButton from '../../common/CubeButton';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(SplitText);
 
@@ -191,40 +192,51 @@ const contentStyles = css`
 `;
 
 const Hero = () => {
-  const [language, setLanguage] = useState('ENG');
+  const { language, content } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
   const [hoverTimer, setHoverTimer] = useState(null);
-  const heroTextContent = {
-    ENG: "Hello!/nI am Sara, a software developer based in Barcelona. Welcome on my website!",
-    ES: "Soy Sara, una desarrolladora de software afincada en Barcelona. ¡Bienvenidos a mi sitio web!",
-    PL: "Jestem Sara, software developer osadzona w Barcelonie. Witaj na mojej stronie internetowej!",
+  const [splitTextInstance, setSplitTextInstance] = useState(null);
+
+  const heroContent = {
+    textHello: {
+      ENG: ["Hello!"],
+      ES: ["Benvenidos!"],
+      PL: ["Witaj!"]
+    },
+    textHeadline: {
+      ENG: ["My name is Sara Kozińska, a software developer based on the sunny side of the world."],
+      ES: ["Mi nombre es Sara Kozińska, una desarrolladora de software basada en el lado soleado del mundo."],
+      PL: ["Nazywam sie Sara Kozińska, software developer mieszkajaca po slonecznej stronie globu."]
+    },
+    textSubheadline: {
+      ENG: ["I am happy to welcome you on my website!"],
+      ES: ["¡Estoy feliz de darle la bienvenida a mi sitio web!"],
+      PL: ["Cieszę się, że odwiedziłeś moją stronę!"]
+    }
   };
 
-  const textContentRef = useRef(null);
+  const textHelloRef = useRef(null);
+  const textHeadingRef = useRef(null);
+  const textSubheadingRef = useRef(null);
 
   useEffect(() => {
-    let timer;
-    if (isHovered) {
-      timer = setTimeout(() => {
-        if (textContentRef.current) {
-          const split = new SplitText(textContentRef.current, { type: "chars, words, lines" });
-          const timeline = gsap.timeline();
-          
-          timeline.set(textContentRef.current, { perspective: 400 })
-            .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
-            .to(split.words, { duration: 0.1, color: "#fdb32c", scale: 0.9, stagger: 0.1 }, "words")
-            .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
-        }
-      }, 3000);
-      setHoverTimer(timer);
-    } else if (hoverTimer) {
-      clearTimeout(hoverTimer);
-    }
 
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [isHovered, language, hoverTimer]);
+    const split = new SplitText(textHeadingRef.current, { type: "chars, words, lines" });
+
+    gsap.timeline()
+      .to(textHelloRef.current, { opacity: 0, y: -20, duration: 0.2 })
+      .to(textHelloRef.current, { opacity: 1, y: 0, duration: 0.5, delay: 0.1 });
+
+    gsap.timeline()
+      .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
+      .to(split.words, { duration: 0.1, color: "#fdb32c", scale: 0.9, stagger: 0.1 }, "words")
+      .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
+
+    gsap.timeline()
+      .to(textSubheadingRef.current, { opacity: 0, y: -20, duration: 0.2 })
+      .to(textSubheadingRef.current, { opacity: 1, y: 0, duration: 0.5, delay: 0.1 });
+      
+  }, [language]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -247,11 +259,11 @@ const Hero = () => {
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
-      <span className="welcome">Hello!</span>
-      <h1 ref={textContentRef} className="introduction regular-link" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        My name is Sara Kozińska, a remote software developer based on the sunny side of the world.
+      <span ref={textHelloRef} className="welcome">{heroContent['textHello'][language]}</span>
+      <h1 ref={textHeadingRef} className="introduction regular-link" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        {heroContent['textHeadline'][language]}
       </h1>
-      <span className="invitation">I am happy to welcome you on my website!</span>
+      <span ref={textSubheadingRef} className="invitation">{heroContent['textSubheadline'][language]}</span>
       <ul>
         <li>
           <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
