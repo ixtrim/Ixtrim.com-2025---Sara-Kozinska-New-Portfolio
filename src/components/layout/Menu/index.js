@@ -56,27 +56,72 @@ const menuStyles = css`
 `;
 
 const Menu = () => {
-  const { language } = useLanguage();
-  const lastScrollY = useRef(window.scrollY);
-  const [hidden, setHidden] = useState(false);
+  const { language, content } = useLanguage();
   const [activeSection, setActiveSection] = useState('section-hero');
   const menuRefs = useRef([]);
   menuRefs.current = [];
+  const buttonRefs = useRef([]);
+
+  buttonRefs.current = menuRefs.current.map(() => React.createRef());
+
   const addToRefs = (el) => {
     if (el && !menuRefs.current.includes(el)) {
       menuRefs.current.push(el);
     }
   };
 
+  const menuLabels = {
+    itemHero: {
+      ENG: ["Start"],
+      ES: ["Start"],
+      PL: ["Start"]
+    },
+    itemAbout: {
+      ENG: ["About"],
+      ES: ["Sobre mí"],
+      PL: ["O mnie"]
+    },
+    itemSkills: {
+      ENG: ["Skills"],
+      ES: ["Habilidades"],
+      PL: ["Umiejętności"]
+    },
+    itemPortfolio: {
+      ENG: ["Portfolio"],
+      ES: ["Portafolio"],
+      PL: ["Portfolio"]
+    },
+    itemClients: {
+      ENG: ["Testimonials"],
+      ES: ["Testimonios"],
+      PL: ["Referencje"]
+    },
+    itemExperience: {
+      ENG: ["Experience"],
+      ES: ["Experiencia"],
+      PL: ["Doświadczenie"]
+    },
+    itemEducation: {
+      ENG: ["Education"],
+      ES: ["Educación"],
+      PL: ["Edukacja"]
+    },
+    itemContact: {
+      ENG: ["Contact"],
+      ES: ["Contacto"],
+      PL: ["Kontakt"]
+    }
+  };
+
   const menuItems = [
-    { id: 'section-hero', labels: { ENG: "Start", ES: "Inicio", PL: "Start" } },
-    { id: 'section-about', labels: { ENG: "About", ES: "Acerca de", PL: "O mnie" } },
-    { id: 'section-skills', labels: { ENG: "Skills", ES: "Habilidades", PL: "Umiejętności" } },
-    { id: 'section-portfolio', labels: { ENG: "Portfolio", ES: "Portafolio", PL: "Portfolio" } },
-    { id: 'section-clients', labels: { ENG: "Testimonials", ES: "Testimonios", PL: "Referencje" } },
-    { id: 'section-experience', labels: { ENG: "Experience", ES: "Experiencia", PL: "Doświadczenie" } },
-    { id: 'section-education', labels: { ENG: "Education", ES: "Educación", PL: "Edukacja" } },
-    { id: 'section-contact', labels: { ENG: "Contact", ES: "Contacto", PL: "Kontakt" } },
+    { id: 'section-hero', key: 'hero', defaultLabel: menuLabels['itemHero'][language] },
+    { id: 'section-about', key: 'about', defaultLabel: menuLabels['itemAbout'][language] },
+    { id: 'section-skills', key: 'skills', defaultLabel: menuLabels['itemSkills'][language] },
+    { id: 'section-portfolio', key: 'portfolio', defaultLabel: menuLabels['itemPortfolio'][language] },
+    { id: 'section-clients', key: 'clients', defaultLabel: menuLabels['itemClients'][language] },
+    { id: 'section-experience', key: 'experience', defaultLabel: menuLabels['itemExperience'][language] },
+    { id: 'section-education', key: 'education', defaultLabel: menuLabels['itemEducation'][language] },
+    { id: 'section-contact', key: 'contact', defaultLabel: menuLabels['itemContact'][language] },
   ];
 
   useEffect(() => {
@@ -116,8 +161,10 @@ const Menu = () => {
   }, [menuItems]);
 
   useEffect(() => {
-    gsap.to("nav.main-menu", { top: hidden ? "-100px" : "0px", ease: "power2.inOut" });
-  }, [hidden]);
+    gsap.timeline()
+      .to(buttonRefs.current, { opacity: 0, y: -20, duration: 0.2 })
+      .to(buttonRefs.current, { opacity: 1, y: 0, duration: 0.5, delay: 0.1 });
+  }, [language]);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -132,11 +179,11 @@ const Menu = () => {
       {menuItems.map((item, index) => (
         <button
           key={item.id}
-          ref={addToRefs}
+          ref={el => buttonRefs.current[index] = el}
           onClick={() => scrollToSection(item.id)}
           className={`regular-link ${activeSection === item.id ? 'active' : ''}`}
         >
-          {item.labels[language]}
+          {content ? content.menu[index]?.title || item.defaultLabel : item.defaultLabel}
         </button>
       ))}
     </nav>

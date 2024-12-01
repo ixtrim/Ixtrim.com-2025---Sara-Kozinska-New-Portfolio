@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { animateFadeAndSlide } from '../utils/animations';
 
 const LanguageContext = createContext();
 
@@ -9,7 +10,11 @@ export const LanguageProvider = ({ children }) => {
   const [content, setContent] = useState(null);
 
   const handleLanguageChange = (newLanguage) => {
-    setLanguage(newLanguage);
+    const buttons = document.querySelectorAll('.main-menu button');
+
+    animateFadeAndSlide(buttons, () => {
+      setLanguage(newLanguage);
+    });
   };
 
   useEffect(() => {

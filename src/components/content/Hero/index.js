@@ -6,6 +6,8 @@ import { gsap } from "gsap-trial";
 import { SplitText } from "gsap-trial/SplitText";
 import Logo from './Logo';
 import CubeButton from '../../common/CubeButton';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { animateFadeAndSlide } from '@/utils/animations';
 
 gsap.registerPlugin(SplitText);
 
@@ -191,51 +193,60 @@ const contentStyles = css`
 `;
 
 const Hero = () => {
-  const [language, setLanguage] = useState('ENG');
-  const [isHovered, setIsHovered] = useState(false);
-  const [hoverTimer, setHoverTimer] = useState(null);
-  const heroTextContent = {
-    ENG: "Hello!/nI am Sara, a software developer based in Barcelona. Welcome on my website!",
-    ES: "Soy Sara, una desarrolladora de software afincada en Barcelona. ¡Bienvenidos a mi sitio web!",
-    PL: "Jestem Sara, software developer osadzona w Barcelonie. Witaj na mojej stronie internetowej!",
-  };
+  const { language, content } = useLanguage();
+  const [displayedLanguage, setDisplayedLanguage] = useState(language);
 
-  const textContentRef = useRef(null);
+  const textHelloRef = useRef(null);
+  const textHeadingRef = useRef(null);
+  const textSubheadingRef = useRef(null);
+  const textButtonResumeRef = useRef(null);
+  const textButtonContactRef = useRef(null);
+
+  const resumeLink = '/sara-kozinska_resume.pdf';
+
+  const heroContent = {
+    textHello: {
+      ENG: ["Hello!"],
+      ES: ["Benvenidos!"],
+      PL: ["Witaj!"]
+    },
+    textHeadline: {
+      ENG: ["My name is Sara Kozińska, a software developer based on the sunny side of the world."],
+      ES: ["Mi nombre es Sara Kozińska, una desarrolladora de software basada en el lado soleado del mundo."],
+      PL: ["Nazywam sie Sara Kozińska, software developer mieszkajaca po slonecznej stronie globu."]
+    },
+    textSubheadline: {
+      ENG: ["I am happy to welcome you on my website!"],
+      ES: ["¡Estoy feliz de darle la bienvenida a mi sitio web!"],
+      PL: ["Cieszę się, że odwiedziłeś moją stronę!"]
+    },
+    textButtonResume: {
+      ENG: ["Resume", "Open resume"],
+      ES: ["Currículum", "Abrir currículum"],
+      PL: ["CV", "Otwórz CV"]
+    },
+    textButtonContact: {
+      ENG: ["Contact Me", "Send e-mail"],
+      ES: ["Contáctame", "Enviar e-mail"],
+      PL: ["Kontakt", "Wyślij e-mail"]
+    }
+  };
 
   useEffect(() => {
-    let timer;
-    if (isHovered) {
-      timer = setTimeout(() => {
-        if (textContentRef.current) {
-          const split = new SplitText(textContentRef.current, { type: "chars, words, lines" });
-          const timeline = gsap.timeline();
-          
-          timeline.set(textContentRef.current, { perspective: 400 })
-            .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
-            .to(split.words, { duration: 0.1, color: "#fdb32c", scale: 0.9, stagger: 0.1 }, "words")
-            .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
-        }
-      }, 3000);
-      setHoverTimer(timer);
-    } else if (hoverTimer) {
-      clearTimeout(hoverTimer);
+    if (language !== displayedLanguage) {
+      const elements = [
+        textHelloRef.current,
+        textHeadingRef.current,
+        textSubheadingRef.current,
+        textButtonResumeRef.current,
+        textButtonContactRef.current
+      ];
+
+      animateFadeAndSlide(elements, () => {
+        setDisplayedLanguage(language);
+      });
     }
-
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [isHovered, language, hoverTimer]);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    if (hoverTimer) {
-      clearTimeout(hoverTimer);
-    }
-  };
+  }, [language, displayedLanguage]);
 
   return (
     <div 
@@ -247,17 +258,17 @@ const Hero = () => {
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
-      <span className="welcome">Hello!</span>
-      <h1 ref={textContentRef} className="introduction regular-link" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        My name is Sara Kozińska, a remote software developer based on the sunny side of the world.
+      <span ref={textHelloRef} className="welcome">{heroContent['textHello'][displayedLanguage]}</span>
+      <h1 ref={textHeadingRef} className="introduction regular-link">
+        {heroContent['textHeadline'][displayedLanguage]}
       </h1>
-      <span className="invitation">I am happy to welcome you on my website!</span>
+      <span ref={textSubheadingRef} className="invitation">{heroContent['textSubheadline'][displayedLanguage]}</span>
       <ul>
         <li>
-          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
+          <CubeButton ref={textButtonResumeRef} textOne={heroContent['textButtonResume'][displayedLanguage][0]} textTwo={heroContent['textButtonResume'][displayedLanguage][1]} linkValue={resumeLink} linkTarget="_blank" variant="btn--standard regular-link" />
         </li>
         <li>
-          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full regular-link" />
+          <CubeButton ref={textButtonContactRef} textOne={heroContent['textButtonContact'][displayedLanguage][0]} textTwo={heroContent['textButtonContact'][displayedLanguage][1]} linkValue="mailto:contact@ixtrim.com" variant="btn--full regular-link" />
         </li>
       </ul>
     </div>

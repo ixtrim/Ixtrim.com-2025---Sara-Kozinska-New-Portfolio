@@ -26,16 +26,11 @@ const footerStyles = css`
 `;
 
 const Footer = () => {
-  const { language } = useLanguage();
+  const { language, content } = useLanguage();
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
 
   const footerTexts = {
-    copyright: {
-      ENG: `© ${new Date().getFullYear()} Sara Kozinska Software Developer. All rights reserved.`,
-      ES: `© ${new Date().getFullYear()} Sara Kozinska Desarrolladora de Software. Todos los derechos reservados.`,
-      PL: `© ${new Date().getFullYear()} Sara Kozinska Programistka. Wszelkie prawa zastrzeżone.`
-    },
     builtWith: {
       ENG: ["Website built with ", " and ", ", powered by "],
       ES: ["Sitio web construido con ", " y ", ", impulsado por "],
@@ -51,7 +46,7 @@ const Footer = () => {
 
   return (
     <footer css={footerStyles}>
-      <p ref={textRef1}>{footerTexts['copyright'][language]}</p>
+      <p ref={textRef1}>{`© ${new Date().getFullYear()} ${content?.copyright || 'Sara Kozinska Software Developer. All rights reserved.'}`}</p>
       <p ref={textRef2}>
         {footerTexts['builtWith'][language][0]}
         <Link href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" variant="white" size="small">REACT</Link>

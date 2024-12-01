@@ -1,7 +1,18 @@
 {
+  "menu": [
+    { "title": "Start" },
+    { "title": "O mnie" },
+    { "title": "Umiejętności" },
+    { "title": "Portfolio" },
+    { "title": "Referencje" },
+    { "title": "Doświadczanie" },
+    { "title": "Edukacja" },
+    { "title": "Kontakt" }
+  ],
   "greeting": "Siemka, witaj na moim portfolio",
   "projects": [
     { "id": 1, "title": "Project 1", "description": "Description of Project 1" },
     { "id": 2, "title": "Project 2", "description": "Description of Project 2" }
-  ]
+  ],
+  "copyright": "Sara Kozinska Software Developer. Wszelkie prawa zastrzeżone."
 }
