@@ -57,7 +57,6 @@ const menuStyles = css`
 
 const Menu = () => {
   const { language, content } = useLanguage();
-  const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState('section-hero');
   const menuRefs = useRef([]);
   menuRefs.current = [];

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
-import { gsap } from 'gsap';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const languagesStyles = css`

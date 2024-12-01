@@ -7,6 +7,7 @@ import { SplitText } from "gsap-trial/SplitText";
 import Logo from './Logo';
 import CubeButton from '../../common/CubeButton';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { animateFadeAndSlide } from '@/utils/animations';
 
 gsap.registerPlugin(SplitText);
 
@@ -193,9 +194,11 @@ const contentStyles = css`
 
 const Hero = () => {
   const { language, content } = useLanguage();
-  const [isHovered, setIsHovered] = useState(false);
-  const [hoverTimer, setHoverTimer] = useState(null);
-  const [splitTextInstance, setSplitTextInstance] = useState(null);
+  const [displayedLanguage, setDisplayedLanguage] = useState(language);
+
+  const textHelloRef = useRef(null);
+  const textHeadingRef = useRef(null);
+  const textSubheadingRef = useRef(null);
 
   const heroContent = {
     textHello: {
@@ -215,39 +218,19 @@ const Hero = () => {
     }
   };
 
-  const textHelloRef = useRef(null);
-  const textHeadingRef = useRef(null);
-  const textSubheadingRef = useRef(null);
-
   useEffect(() => {
+    if (language !== displayedLanguage) {
+      const elements = [
+        textHelloRef.current,
+        textHeadingRef.current,
+        textSubheadingRef.current,
+      ];
 
-    const split = new SplitText(textHeadingRef.current, { type: "chars, words, lines" });
-
-    gsap.timeline()
-      .to(textHelloRef.current, { opacity: 0, y: -20, duration: 0.2 })
-      .to(textHelloRef.current, { opacity: 1, y: 0, duration: 0.5, delay: 0.1 });
-
-    gsap.timeline()
-      .from(split.chars, { duration: 0.2, autoAlpha: 0, scale: 4, force3D: true, stagger: 0.01 })
-      .to(split.words, { duration: 0.1, color: "#fdb32c", scale: 0.9, stagger: 0.1 }, "words")
-      .to(split.words, { duration: 0.2, color: "white", scale: 1, stagger: 0.1 }, "words+=0.1");
-
-    gsap.timeline()
-      .to(textSubheadingRef.current, { opacity: 0, y: -20, duration: 0.2 })
-      .to(textSubheadingRef.current, { opacity: 1, y: 0, duration: 0.5, delay: 0.1 });
-      
-  }, [language]);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    if (hoverTimer) {
-      clearTimeout(hoverTimer);
+      animateFadeAndSlide(elements, () => {
+        setDisplayedLanguage(language);
+      });
     }
-  };
+  }, [language, displayedLanguage]);
 
   return (
     <div 
@@ -259,11 +242,11 @@ const Hero = () => {
         <span className="branding__first-name">Sara</span>
         <span className="branding__last-name">Kozińska</span>
       </div>
-      <span ref={textHelloRef} className="welcome">{heroContent['textHello'][language]}</span>
-      <h1 ref={textHeadingRef} className="introduction regular-link" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        {heroContent['textHeadline'][language]}
+      <span ref={textHelloRef} className="welcome">{heroContent['textHello'][displayedLanguage]}</span>
+      <h1 ref={textHeadingRef} className="introduction regular-link">
+        {heroContent['textHeadline'][displayedLanguage]}
       </h1>
-      <span ref={textSubheadingRef} className="invitation">{heroContent['textSubheadline'][language]}</span>
+      <span ref={textSubheadingRef} className="invitation">{heroContent['textSubheadline'][displayedLanguage]}</span>
       <ul>
         <li>
           <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
