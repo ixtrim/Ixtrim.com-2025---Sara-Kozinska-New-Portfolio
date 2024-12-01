@@ -36,6 +36,7 @@ const theme = {
   spaces: {
     largeDesktop: {
       section: '175px',
+      half_section: '80px',
       elements: '100px',
     },
     normalDesktop: {

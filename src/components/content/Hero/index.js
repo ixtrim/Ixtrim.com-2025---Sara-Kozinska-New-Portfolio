@@ -69,7 +69,7 @@ const contentStyles = css`
     position: relative;
     display: inline-block;
     width: 100%;
-    margin: ${theme.spaces.largeDesktop.elements} 0 0 0;
+    margin: ${theme.spaces.largeDesktop.half_section} 0 0 0;
     padding: 0;
     text-align: center;
     font-family: ${theme.fonts.heading};
