@@ -199,6 +199,10 @@ const Hero = () => {
   const textHelloRef = useRef(null);
   const textHeadingRef = useRef(null);
   const textSubheadingRef = useRef(null);
+  const textButtonResumeRef = useRef(null);
+  const textButtonContactRef = useRef(null);
+
+  const resumeLink = '/sara-kozinska_resume.pdf';
 
   const heroContent = {
     textHello: {
@@ -215,6 +219,16 @@ const Hero = () => {
       ENG: ["I am happy to welcome you on my website!"],
       ES: ["¡Estoy feliz de darle la bienvenida a mi sitio web!"],
       PL: ["Cieszę się, że odwiedziłeś moją stronę!"]
+    },
+    textButtonResume: {
+      ENG: ["Resume", "Open resume"],
+      ES: ["Currículum", "Abrir currículum"],
+      PL: ["CV", "Otwórz CV"]
+    },
+    textButtonContact: {
+      ENG: ["Contact Me", "Send e-mail"],
+      ES: ["Contáctame", "Enviar e-mail"],
+      PL: ["Kontakt", "Wyślij e-mail"]
     }
   };
 
@@ -224,6 +238,8 @@ const Hero = () => {
         textHelloRef.current,
         textHeadingRef.current,
         textSubheadingRef.current,
+        textButtonResumeRef.current,
+        textButtonContactRef.current
       ];
 
       animateFadeAndSlide(elements, () => {
@@ -249,10 +265,10 @@ const Hero = () => {
       <span ref={textSubheadingRef} className="invitation">{heroContent['textSubheadline'][displayedLanguage]}</span>
       <ul>
         <li>
-          <CubeButton textOne="Resume" textTwo="Open resume" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--standard regular-link" />
+          <CubeButton ref={textButtonResumeRef} textOne={heroContent['textButtonResume'][displayedLanguage][0]} textTwo={heroContent['textButtonResume'][displayedLanguage][1]} linkValue={resumeLink} linkTarget="_blank" variant="btn--standard regular-link" />
         </li>
         <li>
-          <CubeButton textOne="Contact Me" textTwo="Send e-mail" linkValue="http://ixtrim.com" linkTarget="_blank" variant="btn--full regular-link" />
+          <CubeButton ref={textButtonContactRef} textOne={heroContent['textButtonContact'][displayedLanguage][0]} textTwo={heroContent['textButtonContact'][displayedLanguage][1]} linkValue="mailto:contact@ixtrim.com" variant="btn--full regular-link" />
         </li>
       </ul>
     </div>
