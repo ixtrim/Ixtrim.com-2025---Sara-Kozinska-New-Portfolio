@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
 import Link from '@/components/common/Link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { gsap } from 'gsap';
+import { animateFadeAndSlide } from '@/utils/animations';
 
 const footerStyles = css`
   width: 90%;
@@ -27,6 +28,7 @@ const footerStyles = css`
 
 const Footer = () => {
   const { language, content } = useLanguage();
+  const [displayedLanguage, setDisplayedLanguage] = useState(language);
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
 
@@ -39,20 +41,27 @@ const Footer = () => {
   };
 
   useEffect(() => {
-    gsap.timeline()
-      .to([textRef1.current, textRef2.current], { opacity: 0, y: -20, duration: 0.2 })
-      .to([textRef1.current, textRef2.current], { opacity: 1, y: 0, duration: 0.5, delay: 0.1 });
-  }, [language]);
+    if (language !== displayedLanguage) {
+      const elements = [
+        textRef1.current,
+        textRef2.current
+      ];
+
+      animateFadeAndSlide(elements, () => {
+        setDisplayedLanguage(language);
+      });
+    }
+  }, [language, displayedLanguage]);
 
   return (
     <footer css={footerStyles}>
       <p ref={textRef1}>{`© ${new Date().getFullYear()} ${content?.copyright || 'Sara Kozinska Software Developer. All rights reserved.'}`}</p>
       <p ref={textRef2}>
-        {footerTexts['builtWith'][language][0]}
+        {footerTexts['builtWith'][displayedLanguage][0]}
         <Link href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" variant="white" size="small">REACT</Link>
-        {footerTexts['builtWith'][language][1]}
+        {footerTexts['builtWith'][displayedLanguage][1]}
         <Link href="https://gsap.com/" target="_blank" rel="noopener noreferrer" variant="white" size="small">GSAP</Link>
-        {footerTexts['builtWith'][language][2]}
+        {footerTexts['builtWith'][displayedLanguage][2]}
         <Link href="https://strapi.io/" target="_blank" rel="noopener noreferrer" variant="white" size="small">STRAPI</Link>.
       </p>
     </footer>
