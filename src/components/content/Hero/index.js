@@ -9,8 +9,6 @@ import CubeButton from '../../common/CubeButton';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { animateFadeAndSlide } from '@/utils/animations';
 
-gsap.registerPlugin(SplitText);
-
 const contentStyles = css`
   width: 90%;
   max-width: 1400px;
