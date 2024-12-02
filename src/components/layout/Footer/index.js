@@ -34,9 +34,9 @@ const Footer = () => {
 
   const footerTexts = {
     builtWith: {
-      ENG: ["Website built with ", " and ", ", powered by "],
-      ES: ["Sitio web construido con ", " y ", ", impulsado por "],
-      PL: ["Strona zbudowana przy użyciu ", " i ", ", treść zarządzana w "]
+      ENG: ["Website built with ", " + ", " powered by creative mind"],
+      ES: ["Sitio web construido con ", " + ", " impulsado por una mente creativa"],
+      PL: ["Strona zbudowana przy użyciu ", " + ", " sterowanych przez kreatywny umysł"],
     }
   };
 
@@ -61,8 +61,7 @@ const Footer = () => {
         <Link href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" variant="white" size="small">REACT</Link>
         {footerTexts['builtWith'][displayedLanguage][1]}
         <Link href="https://gsap.com/" target="_blank" rel="noopener noreferrer" variant="white" size="small">GSAP</Link>
-        {footerTexts['builtWith'][displayedLanguage][2]}
-        <Link href="https://strapi.io/" target="_blank" rel="noopener noreferrer" variant="white" size="small">STRAPI</Link>.
+        {footerTexts['builtWith'][displayedLanguage][2]}.
       </p>
     </footer>
   );
