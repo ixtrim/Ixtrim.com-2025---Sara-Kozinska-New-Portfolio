@@ -12,7 +12,7 @@ const menuStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 50px;
   padding: 20px;
   color: ${theme.colors.white};
   position: fixed;
@@ -96,11 +96,6 @@ const Menu = () => {
       ES: ["Testimonios"],
       PL: ["Referencje"]
     },
-    itemExperience: {
-      ENG: ["Experience"],
-      ES: ["Experiencia"],
-      PL: ["Doświadczenie"]
-    },
     itemContact: {
       ENG: ["Contact"],
       ES: ["Contacto"],
@@ -114,7 +109,6 @@ const Menu = () => {
     { id: 'section-skills', key: 'skills', defaultLabel: menuLabels['itemSkills'][language] },
     { id: 'section-portfolio', key: 'portfolio', defaultLabel: menuLabels['itemPortfolio'][language] },
     { id: 'section-clients', key: 'clients', defaultLabel: menuLabels['itemClients'][language] },
-    { id: 'section-experience', key: 'experience', defaultLabel: menuLabels['itemExperience'][language] },
     { id: 'section-contact', key: 'contact', defaultLabel: menuLabels['itemContact'][language] },
   ];
 
