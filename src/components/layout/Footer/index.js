@@ -33,6 +33,11 @@ const Footer = () => {
   const textRef2 = useRef(null);
 
   const footerTexts = {
+    textRights: {
+      ENG: ["All rights reserved."],
+      ES: ["Todos los derechos reservados."],
+      PL: ["Wszelkie prawa zastrzeżone."]
+    },
     builtWith: {
       ENG: ["Website built with ", " + ", " powered by creative mind"],
       ES: ["Sitio web construido con ", " + ", " impulsado por una mente creativa"],
@@ -55,7 +60,7 @@ const Footer = () => {
 
   return (
     <footer css={footerStyles}>
-      <p ref={textRef1}>{`© ${new Date().getFullYear()} ${content?.copyright || 'Sara Kozinska Software Developer. All rights reserved.'}`}</p>
+      <p ref={textRef1}>{`© ${new Date().getFullYear()} ${content?.copyright || 'Sara Kozinska Software Developer.'}`} {footerTexts['textRights'][displayedLanguage]}</p>
       <p ref={textRef2}>
         {footerTexts['builtWith'][displayedLanguage][0]}
         <Link href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" variant="white" size="small">REACT</Link>
