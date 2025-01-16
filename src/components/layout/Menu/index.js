@@ -101,11 +101,6 @@ const Menu = () => {
       ES: ["Experiencia"],
       PL: ["Doświadczenie"]
     },
-    itemEducation: {
-      ENG: ["Education"],
-      ES: ["Educación"],
-      PL: ["Edukacja"]
-    },
     itemContact: {
       ENG: ["Contact"],
       ES: ["Contacto"],
@@ -120,7 +115,6 @@ const Menu = () => {
     { id: 'section-portfolio', key: 'portfolio', defaultLabel: menuLabels['itemPortfolio'][language] },
     { id: 'section-clients', key: 'clients', defaultLabel: menuLabels['itemClients'][language] },
     { id: 'section-experience', key: 'experience', defaultLabel: menuLabels['itemExperience'][language] },
-    { id: 'section-education', key: 'education', defaultLabel: menuLabels['itemEducation'][language] },
     { id: 'section-contact', key: 'contact', defaultLabel: menuLabels['itemContact'][language] },
   ];
 
