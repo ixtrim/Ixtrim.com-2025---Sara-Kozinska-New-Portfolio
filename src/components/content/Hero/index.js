@@ -2,14 +2,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
-import { gsap } from "gsap-trial";
-import { SplitText } from "gsap-trial/SplitText";
 import Logo from './Logo';
 import CubeButton from '../../common/CubeButton';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { animateFadeAndSlide } from '@/utils/animations';
-
-gsap.registerPlugin(SplitText);
 
 const contentStyles = css`
   width: 90%;
