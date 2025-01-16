@@ -80,44 +80,34 @@ const Contact = () => {
   const { language, content } = useLanguage();
   const [displayedLanguage, setDisplayedLanguage] = useState(language);
 
-  const textHelloRef = useRef(null);
-  const textHeadingRef = useRef(null);
-  const textSubheadingRef = useRef(null);
+  const textCTARef = useRef(null);
+  const textContentRef = useRef(null);
+  const textCallRef = useRef(null);
 
-  const heroContent = {
-    textHello: {
-      ENG: ["I'd really love to hear from you!"],
-      ES: ["¡Me encantaría saber de ti!"],
-      PL: ["Bardzo chętnie usłyszę od Ciebie!"]
+  const contactContent = {
+    textCTA: {
+      ENG: ["I'd love to talk!"],
+      ES: ["¡Me encantaría hablar!"],
+      PL: ["Bardzo chętnie porozmawiam!"]
     },
-    textHeadline: {
-      ENG: ["My name is Sara Kozińska, a software developer based on the sunny side of the world."],
-      ES: ["Mi nombre es Sara Kozińska, una desarrolladora de software basada en el lado soleado del mundo."],
-      PL: ["Nazywam sie Sara Kozińska, software developer mieszkajaca po slonecznej stronie globu."]
+    textContent: {
+      ENG: ["Whether you have a question, quote or just want to chat — shoot me a message."],
+      ES: ["Si tienes alguna pregunta, una oferta o simplemente quieres saludarme, escríbeme."],
+      PL: ["Jeśli masz zapytanie, ofertę lub po prostu chcesz powiedzieć cześć — napisz do mnie."]
     },
-    textSubheadline: {
-      ENG: ["I am happy to welcome you on my website!"],
-      ES: ["¡Estoy feliz de darle la bienvenida a mi sitio web!"],
-      PL: ["Cieszę się, że odwiedziłeś moją stronę!"]
-    },
-    textButtonResume: {
-      ENG: ["Resume", "Open resume"],
-      ES: ["Currículum", "Abrir currículum"],
-      PL: ["CV", "Otwórz CV"]
-    },
-    textButtonContact: {
-      ENG: ["Contact Me", "Send e-mail"],
-      ES: ["Contáctame", "Enviar e-mail"],
-      PL: ["Kontakt", "Wyślij e-mail"]
+    textCall: {
+      ENG: ["Schedule a call with me!"],
+      ES: ["¡Agenda una llamada conmigo!"],
+      PL: ["Zaplanujmy rozmowę on-line."]
     }
   };
 
   useEffect(() => {
     if (language !== displayedLanguage) {
       const elements = [
-        textHelloRef.current,
-        textHeadingRef.current,
-        textSubheadingRef.current
+        textCTARef.current,
+        textContentRef.current,
+        textCallRef.current
       ];
 
       animateFadeAndSlide(elements, () => {
@@ -129,8 +119,8 @@ const Contact = () => {
   return (
     <div css={contactStyles}>
       <div id="section-contact">
-        <h2>I'd really love to hear from you!</h2>
-        <h3>Whether you have a question, quote or just want to chat about code — shoot me a message.</h3>
+        <h2 ref={textCTARef}>{contactContent['textCTA'][displayedLanguage]}</h2>
+        <h3 ref={textContentRef}>{contactContent['textContent'][displayedLanguage]}</h3>
         <div className="reach-out">
           <ul>
             <li>
@@ -155,7 +145,7 @@ const Contact = () => {
               </a>
             </li>
             <li>
-              <a href="https://calendly.com/sarakozinska/job-project-interview" target="_blank">Schedule a call with me!</a>
+              <a href="https://calendly.com/sarakozinska/job-project-interview" target="_blank" ref={textCallRef}>{contactContent['textCall'][displayedLanguage]}</a>
             </li>
           </ul>
         </div>
