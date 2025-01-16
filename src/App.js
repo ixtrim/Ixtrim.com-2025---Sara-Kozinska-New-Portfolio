@@ -13,7 +13,6 @@ import Skills from './components/content/Skills';
 import Portfolio from './components/content/Portfolio';
 import Clients from './components/content/Clients';
 import Experience from './components/content/Experience';
-import Education from './components/content/Education';
 import Contact from './components/content/Contact';
 import Footer from './components/layout/Footer';
 import Cursor from './components/layout/Cursor';
@@ -68,7 +67,6 @@ function App() {
           <Portfolio />
           <Clients />
           <Experience />
-          <Education />
           <Contact />
           <Footer />
           <ExternalLinks />
