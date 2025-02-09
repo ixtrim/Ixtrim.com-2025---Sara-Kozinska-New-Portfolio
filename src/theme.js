@@ -15,7 +15,7 @@ const theme = {
     base: '14px',
     smallest: '10px',
     small: '0.8rem',
-    medium: '1rem',
+    medium: '1.2rem',
     large: '1.5rem',
     xlarge: '2rem',
     xxlarge: '3rem',
@@ -38,6 +38,8 @@ const theme = {
       section: '175px',
       half_section: '80px',
       elements: '100px',
+      heading: '20px',
+      paragraph: '20px',
     },
     normalDesktop: {
       section: '150px',
