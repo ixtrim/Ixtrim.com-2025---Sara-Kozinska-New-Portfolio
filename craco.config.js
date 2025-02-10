@@ -12,6 +12,17 @@ module.exports = {
       
       // Add a condition to ignore specific warnings.
       webpackConfig.ignoreWarnings.push(/Failed to parse source map/);
+
+      const svgRuleIndex = webpackConfig.module.rules.findIndex(rule =>
+        rule.test && rule.test.toString().includes('svg')
+      );
+
+      if (svgRuleIndex !== -1) {
+        webpackConfig.module.rules[svgRuleIndex] = {
+          test: /\.svg$/,
+          use: ['file-loader'],
+        };
+      }
       
       return webpackConfig;
     },

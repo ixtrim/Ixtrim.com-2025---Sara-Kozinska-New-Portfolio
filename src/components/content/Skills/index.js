@@ -1,10 +1,129 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { animateFadeAndSlide } from '@/utils/animations';
 
+// Dynamically import all SVG icons from skills folder
+const importIcons = require.context('@/assets/images/skills', false, /\.svg$/);
+
+// Helper function to get icon paths
+const getIcon = (iconName) => {
+  try {
+    return importIcons(`./${iconName}`).default;
+  } catch (error) {
+    console.error(`Icon not found: ${iconName}`);
+    return null;
+  }
+};
+
+// Skills Data with dynamic icon loading
+const skillsData = [
+  {
+    category: "textSubHeaderFirst",
+    skills: [
+      { name: "React", icon: getIcon("react.svg") },
+      { name: "Vue.js", icon: getIcon("vue.svg") },
+      { name: "Tailwind CSS", icon: getIcon("tailwind.svg") },
+      { name: "GSAP", icon: getIcon("gsap.svg") },
+      { name: "Bootstrap", icon: getIcon("bootstrap.svg") },
+      { name: "SASS", icon: getIcon("sass.svg") },
+      { name: "TypeScript", icon: getIcon("typescript.svg") },
+    ],
+  },
+  {
+    category: "textSubHeaderSecond",
+    skills: [
+      { name: "WordPress", icon: getIcon("wordpress.svg") },
+      { name: "Laravel", icon: getIcon("laravel.svg") },
+    ],
+  },
+  {
+    category: "textSubHeaderThird",
+    skills: [
+      { name: "MySQL", icon: getIcon("mysql.svg") },
+      { name: "Firebase", icon: getIcon("firebase.svg") },
+      { name: "REST API", icon: getIcon("rest-api.svg") },
+    ],
+  },
+  {
+    category: "textSubHeaderFourth",
+    skills: [
+      { name: "Capacitor", icon: getIcon("capacitor.svg") },
+      { name: "Flutter", icon: getIcon("flutter.svg") },
+    ],
+  },
+  {
+    category: "textSubHeaderFifth",
+    skills: [
+      { name: "WooCommerce", icon: getIcon("woocommerce.svg") },
+      { name: "Shopify", icon: getIcon("shopify.svg") },
+    ],
+  },
+  {
+    category: "textSubHeaderSixth",
+    skills: [
+      { name: "Git", icon: getIcon("git.svg") },
+      { name: "Docker", icon: getIcon("docker.svg") },
+      { name: "CI/CD", icon: getIcon("cicd.svg") },
+      { name: "GitLab", icon: getIcon("gitlab.svg") },
+    ],
+  },
+  {
+    category: "textSubHeaderSeventh",
+    skills: [
+      { name: "Cypress", icon: getIcon("cypress.svg") },
+      { name: "Lighthouse", icon: getIcon("lighthouse.svg") },
+      { name: "PageSpeed Insights", icon: getIcon("pagespeed.svg") },
+    ],
+  },
+];
+
+// Translations
+const skillsContent = {
+  textHeader: {
+    ENG: "Tech Stack & Tools",
+    ES: "Tecnologías y Herramientas",
+    PL: "Technologie i Narzędzia",
+  },
+  textSubHeaderFirst: {
+    ENG: "Frontend Development",
+    ES: "Desarrollo Frontend",
+    PL: "Frontend Development",
+  },
+  textSubHeaderSecond: {
+    ENG: "Backend & CMS",
+    ES: "Backend y CMS",
+    PL: "Backend & CMS",
+  },
+  textSubHeaderThird: {
+    ENG: "Databases & APIs",
+    ES: "Bases de Datos y APIs",
+    PL: "Bazy Danych i API",
+  },
+  textSubHeaderFourth: {
+    ENG: "Mobile & No-Code Development",
+    ES: "Desarrollo Móvil y No-Code",
+    PL: "Mobile & No-Code Development",
+  },
+  textSubHeaderFifth: {
+    ENG: "E-commerce & Integrations",
+    ES: "E-commerce e Integraciones",
+    PL: "E-commerce & Integracje",
+  },
+  textSubHeaderSixth: {
+    ENG: "DevOps & Version Control",
+    ES: "DevOps y Control de Versiones",
+    PL: "DevOps & Kontrola Wersji",
+  },
+  textSubHeaderSeventh: {
+    ENG: "Testing & Debugging",
+    ES: "Pruebas y Depuración",
+    PL: "Testowanie i Debugowanie",
+  },
+};
+
+// Styles
 const skillsStyles = css`
   width: 90%;
   max-width: 1400px;
@@ -133,255 +252,32 @@ const skillsStyles = css`
 `;
 
 const Skills = () => {
-  const { language, content } = useLanguage();
-    const [displayedLanguage, setDisplayedLanguage] = useState(language);
-  
-    const textHeaderRef = useRef(null);
-    const textSubHeaderFirstRef = useRef(null);
-    const textSubHeaderSecondRef = useRef(null);
-    const textSubHeaderThirdRef = useRef(null);
-    const textSubHeaderFourthRef = useRef(null);
-    const textSubHeaderFifthRef = useRef(null);
-    const textSubHeaderSixthRef = useRef(null);
-    const textSubHeaderSeventhRef = useRef(null);
+  const { language } = useLanguage();
+  const [displayedLanguage, setDisplayedLanguage] = useState(language);
 
-    const skillsContent = {
-      textHeader: {
-        ENG: ["Tech Stack & Tools"],
-        ES: ["Tecnologías y Herramientas"],
-        PL: ["Technologie i Narzędzia"]
-      },
-      textSubHeaderFirst: {
-        ENG: ["Frontend Development"],
-        ES: ["Desarrollo Frontend"],
-        PL: ["Frontend Development"]
-      },
-      textSubHeaderSecond: {
-        ENG: ["Backend & CMS"],
-        ES: ["Backend y CMS"],
-        PL: ["Backend & CMS"]
-      },
-      textSubHeaderThird: {
-        ENG: ["Databases & APIs"],
-        ES: ["Bases de Datos y APIs"],
-        PL: ["Bazy Danych i API"]
-      },
-      textSubHeaderFourth: {
-        ENG: ["Mobile & No-Code Development"],
-        ES: ["Desarrollo Móvil y No-Code"],
-        PL: ["Mobile & No-Code Development"]
-      },
-      textSubHeaderFifth: {
-        ENG: ["E-commerce & Integrations"],
-        ES: ["E-commerce e Integraciones"],
-        PL: ["E-commerce & Integracje"]
-      },
-      textSubHeaderSixth: {
-        ENG: ["DevOps & Version Control"],
-        ES: ["DevOps y Control de Versiones"],
-        PL: ["DevOps & Kontrola Wersji"]
-      },
-      textSubHeaderSeventh: {
-        ENG: ["Testing & Debugging"],
-        ES: ["Pruebas y Depuración"],
-        PL: ["Testowanie i Debugowanie"]
-      }
-    };
-    
-    useEffect(() => {
-        if (language !== displayedLanguage) {
-          const elements = [
-            textHeaderRef.current,
-            textSubHeaderFirstRef.current,
-            textSubHeaderSecondRef.current,
-            textSubHeaderThirdRef.current,
-            textSubHeaderFourthRef.current,
-            textSubHeaderFifthRef.current,
-            textSubHeaderSixthRef.current,
-            textSubHeaderSeventhRef.current
-          ];
-    
-          animateFadeAndSlide(elements, () => {
-            setDisplayedLanguage(language);
-          });
-        }
-      }, [language, displayedLanguage]);
+  useEffect(() => {
+    if (language !== displayedLanguage) {
+      setDisplayedLanguage(language);
+    }
+  }, [language, displayedLanguage]);
 
   return (
     <div css={skillsStyles}>
       <div id="section-skills">
-        <h2 ref={textHeaderRef}>{skillsContent['textHeader'][displayedLanguage]}</h2>
-
-        <div className="skill-set">
-          <h3 ref={textSubHeaderFirstRef}>{skillsContent['textSubHeaderFirst'][displayedLanguage]}</h3>
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>React</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>React Native</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-              <span>Vue.js</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="JavaScript" />
-              <span>Tailwind CSS</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-plain.svg" alt="JavaScript" />
-              <span>GSAP</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="JavaScript" />
-              <span>Bootstrap</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="JavaScript" />
-              <span>SASS</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="JavaScript" />
-              <span>TypeScript</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="JavaScript" />
-              <span>JavaScript</span>
+        <h2>{skillsContent.textHeader[displayedLanguage]}</h2>
+        {skillsData.map((category, index) => (
+          <div key={index} className="skill-set">
+            <h3>{skillsContent[category.category][displayedLanguage]}</h3>
+            <div className="skill-set__grid">
+              {category.skills.map((skill, i) => (
+                <div key={i} className="skill-set__grid__item">
+                  <img src={skill.icon} alt={skill.name} />
+                  <span>{skill.name}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-
-        <div className="skill-set">
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>PHP</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>WordPress</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-              <span>Drupal</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="JavaScript" />
-              <span>Joomla</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-plain.svg" alt="JavaScript" />
-              <span>Prestashop</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="JavaScript" />
-              <span>Laravel</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="JavaScript" />
-              <span>Symfony</span>
-            </div>
-          </div>
-          <h3 ref={textSubHeaderSecondRef}>{skillsContent['textSubHeaderSecond'][displayedLanguage]}</h3>
-        </div>
-
-        <div className="skill-set">
-          <h3 ref={textSubHeaderThirdRef}>{skillsContent['textSubHeaderThird'][displayedLanguage]}</h3>
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>MySQL</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>Firebase</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-              <span>REST API</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="skill-set">
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>Capacitor</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>Flutter</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-              <span>Bubble.io</span>
-            </div>
-          </div>
-          <h3 ref={textSubHeaderFourthRef}>{skillsContent['textSubHeaderFourth'][displayedLanguage]}</h3>
-        </div>
-
-        <div className="skill-set">
-          <h3 ref={textSubHeaderFifthRef}>{skillsContent['textSubHeaderFifth'][displayedLanguage]}</h3>
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>WooCommerce</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>Shopify</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-              <span>Prestashop</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="skill-set">
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-                      <span>Git</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-                      <span>CI/CD</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-                      <span>Docker</span>
-            </div>
-          </div>
-          <h3 ref={textSubHeaderSixthRef}>{skillsContent['textSubHeaderSixth'][displayedLanguage]}</h3>
-        </div>
-
-        <div className="skill-set">
-        <h3 ref={textSubHeaderSeventhRef}>{skillsContent['textSubHeaderSeventh'][displayedLanguage]}</h3>
-          <div class="skill-set__grid">
-            <div class="skill-set__grid__item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-                      <span>Cypress</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-                      <span>Lighthouse</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-                      <span>PageSpeed Insights</span>
-            </div>
-            <div class="skill-set__grid__item">
-              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-                      <span>GTmetrix</span>
-            </div>
-          </div>
-        </div>
-
+        ))}
       </div>
     </div>
   );
