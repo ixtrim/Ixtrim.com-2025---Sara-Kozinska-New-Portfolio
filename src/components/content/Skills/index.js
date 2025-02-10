@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/theme';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { animateFadeAndSlide } from '@/utils/animations';
 
 const skillsStyles = css`
   width: 90%;
@@ -131,13 +133,87 @@ const skillsStyles = css`
 `;
 
 const Skills = () => {
+  const { language, content } = useLanguage();
+    const [displayedLanguage, setDisplayedLanguage] = useState(language);
+  
+    const textHeaderRef = useRef(null);
+    const textSubHeaderFirstRef = useRef(null);
+    const textSubHeaderSecondRef = useRef(null);
+    const textSubHeaderThirdRef = useRef(null);
+    const textSubHeaderFourthRef = useRef(null);
+    const textSubHeaderFifthRef = useRef(null);
+    const textSubHeaderSixthRef = useRef(null);
+    const textSubHeaderSeventhRef = useRef(null);
+
+    const skillsContent = {
+      textHeader: {
+        ENG: ["Tech Stack & Tools"],
+        ES: ["Tecnologías y Herramientas"],
+        PL: ["Technologie i Narzędzia"]
+      },
+      textSubHeaderFirst: {
+        ENG: ["Frontend Development"],
+        ES: ["Desarrollo Frontend"],
+        PL: ["Frontend Development"]
+      },
+      textSubHeaderSecond: {
+        ENG: ["Backend & CMS"],
+        ES: ["Backend y CMS"],
+        PL: ["Backend & CMS"]
+      },
+      textSubHeaderThird: {
+        ENG: ["Databases & APIs"],
+        ES: ["Bases de Datos y APIs"],
+        PL: ["Bazy Danych i API"]
+      },
+      textSubHeaderFourth: {
+        ENG: ["Mobile & No-Code Development"],
+        ES: ["Desarrollo Móvil y No-Code"],
+        PL: ["Mobile & No-Code Development"]
+      },
+      textSubHeaderFifth: {
+        ENG: ["E-commerce & Integrations"],
+        ES: ["E-commerce e Integraciones"],
+        PL: ["E-commerce & Integracje"]
+      },
+      textSubHeaderSixth: {
+        ENG: ["DevOps & Version Control"],
+        ES: ["DevOps y Control de Versiones"],
+        PL: ["DevOps & Kontrola Wersji"]
+      },
+      textSubHeaderSeventh: {
+        ENG: ["Testing & Debugging"],
+        ES: ["Pruebas y Depuración"],
+        PL: ["Testowanie i Debugowanie"]
+      }
+    };
+    
+    useEffect(() => {
+        if (language !== displayedLanguage) {
+          const elements = [
+            textHeaderRef.current,
+            textSubHeaderFirstRef.current,
+            textSubHeaderSecondRef.current,
+            textSubHeaderThirdRef.current,
+            textSubHeaderFourthRef.current,
+            textSubHeaderFifthRef.current,
+            textSubHeaderSixthRef.current,
+            textSubHeaderSeventhRef.current
+          ];
+    
+          animateFadeAndSlide(elements, () => {
+            setDisplayedLanguage(language);
+          });
+        }
+      }, [language, displayedLanguage]);
+
   return (
     <div css={skillsStyles}>
       <div id="section-skills">
-        <h2>Tech Stack & Tools</h2>
+        <h2 ref={textHeaderRef}>{skillsContent['textHeader'][displayedLanguage]}</h2>
 
         <div className="skill-set">
-          <h3>Frontend Development</h3>
+          <h3 ref={textSubHeaderFirstRef}>{skillsContent['textSubHeaderFirst'][displayedLanguage]}</h3>
           <div class="skill-set__grid">
             <div class="skill-set__grid__item">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
@@ -209,11 +285,11 @@ const Skills = () => {
               <span>Symfony</span>
             </div>
           </div>
-          <h3>Backend & CMS</h3>
+          <h3 ref={textSubHeaderSecondRef}>{skillsContent['textSubHeaderSecond'][displayedLanguage]}</h3>
         </div>
 
         <div className="skill-set">
-          <h3>Databases & APIs</h3>
+          <h3 ref={textSubHeaderThirdRef}>{skillsContent['textSubHeaderThird'][displayedLanguage]}</h3>
           <div class="skill-set__grid">
             <div class="skill-set__grid__item">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
@@ -245,11 +321,11 @@ const Skills = () => {
               <span>Bubble.io</span>
             </div>
           </div>
-          <h3>Mobile & No-Code Development</h3>
+          <h3 ref={textSubHeaderFourthRef}>{skillsContent['textSubHeaderFourth'][displayedLanguage]}</h3>
         </div>
 
         <div className="skill-set">
-        <h3>E-commerce & Integrations</h3>
+          <h3 ref={textSubHeaderFifthRef}>{skillsContent['textSubHeaderFifth'][displayedLanguage]}</h3>
           <div class="skill-set__grid">
             <div class="skill-set__grid__item">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
@@ -266,45 +342,45 @@ const Skills = () => {
           </div>
         </div>
 
-<div className="skill-set">
-  <div class="skill-set__grid">
-    <div class="skill-set__grid__item">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>Git</span>
-    </div>
-    <div class="skill-set__grid__item">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>CI/CD</span>
-    </div>
-    <div class="skill-set__grid__item">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
-              <span>Docker</span>
-    </div>
-  </div>
-  <h3>DevOps & Version Control</h3>
-</div>
+        <div className="skill-set">
+          <div class="skill-set__grid">
+            <div class="skill-set__grid__item">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
+                      <span>Git</span>
+            </div>
+            <div class="skill-set__grid__item">
+              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
+                      <span>CI/CD</span>
+            </div>
+            <div class="skill-set__grid__item">
+              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="JavaScript" />
+                      <span>Docker</span>
+            </div>
+          </div>
+          <h3 ref={textSubHeaderSixthRef}>{skillsContent['textSubHeaderSixth'][displayedLanguage]}</h3>
+        </div>
 
-<div className="skill-set">
-<h3>Testing & Debugging</h3>
-  <div class="skill-set__grid">
-    <div class="skill-set__grid__item">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
-              <span>Cypress</span>
-    </div>
-    <div class="skill-set__grid__item">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>Lighthouse</span>
-    </div>
-    <div class="skill-set__grid__item">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>PageSpeed Insights</span>
-    </div>
-    <div class="skill-set__grid__item">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
-              <span>GTmetrix</span>
-    </div>
-  </div>
-</div>
+        <div className="skill-set">
+        <h3 ref={textSubHeaderSeventhRef}>{skillsContent['textSubHeaderSeventh'][displayedLanguage]}</h3>
+          <div class="skill-set__grid">
+            <div class="skill-set__grid__item">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="JavaScript" />
+                      <span>Cypress</span>
+            </div>
+            <div class="skill-set__grid__item">
+              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
+                      <span>Lighthouse</span>
+            </div>
+            <div class="skill-set__grid__item">
+              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
+                      <span>PageSpeed Insights</span>
+            </div>
+            <div class="skill-set__grid__item">
+              <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="JavaScript" />
+                      <span>GTmetrix</span>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
