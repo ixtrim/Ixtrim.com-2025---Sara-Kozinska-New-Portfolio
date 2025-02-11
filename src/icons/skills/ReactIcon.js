@@ -1,37 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="1953.8496"
-   viewBox="175.7 78 490.6 341.45476"
-   width="2194"
-   version="1.1"
-   id="svg8"
-   sodipodi:docname="react.svg"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs12" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:zoom="0.3128"
-     inkscape:cx="1096.5473"
-     inkscape:cy="1039.0026"
-     inkscape:window-width="1920"
-     inkscape:window-height="957"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg8" />
-  <g
+import React from 'react';
+
+const ReactIcon = ({ width = 30, height = 30, color = '#414042', ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="175.7 78 490.6 341.45476"
+    width={width}
+    height={height}
+    {...props}
+  >
+    <g
      fill="#61dafb"
      id="g6"
      transform="translate(0,-47.722624)">
@@ -45,3 +22,6 @@
        id="circle4" />
   </g>
 </svg>
+);
+
+export default ReactIcon;

@@ -4,82 +4,146 @@ import { css } from '@emotion/react';
 import theme from '@/theme';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Dynamically import all SVG icons from skills folder
-const importIcons = require.context('@/assets/images/skills', false, /\.svg$/);
+import BitBucketIcon from '@/icons/skills/BitBucketIcon';
+import ReactIcon from '@/icons/skills/ReactIcon';
+import ReactNativeIcon from '@/icons/skills/ReactNativeIcon';
+import VueIcon from '@/icons/skills/VueIcon';
+import TailwindIcon from '@/icons/skills/TailwindIcon';
+import GSAPIcon from '@/icons/skills/GSAPIcon';
+import BootstrapIcon from '@/icons/skills/BootstrapIcon';
+import SASSIcon from '@/icons/skills/SASSIcon';
+import TypeScriptIcon from '@/icons/skills/TypeScriptIcon';
+import JavaScriptIcon from '@/icons/skills/JavaScriptIcon';
+import PHPIcon from '@/icons/skills/PHPIcon';
+import WordPressIcon from '@/icons/skills/WordPressIcon';
+import DrupalIcon from '@/icons/skills/DrupalIcon';
+import JoomlaIcon from '@/icons/skills/JoomlaIcon';
+import PrestashopIcon from '@/icons/skills/PrestashopIcon';
+import LaravelIcon from '@/icons/skills/LaravelIcon';
+import SymfonyIcon from '@/icons/skills/SymfonyIcon';
+import MySQLIcon from '@/icons/skills/MySQLIcon';
+import FirebaseIcon from '@/icons/skills/FirebaseIcon';
+import RestApiIcon from '@/icons/skills/RestApiIcon';
+import CapacitorIcon from '@/icons/skills/CapacitorIcon';
+import FlutterIcon from '@/icons/skills/FlutterIcon';
+import BubbleIoIcon from '@/icons/skills/BubbleIoIcon';
+import WooCommerceIcon from '@/icons/skills/WooCommerceIcon';
+import ShopifyIcon from '@/icons/skills/ShopifyIcon';
+import GitIcon from '@/icons/skills/GitIcon';
+import CiCdIcon from '@/icons/skills/CiCdIcon';
+import DockerIcon from '@/icons/skills/DockerIcon';
+import CypressIcon from '@/icons/skills/CypressIcon';
+import LighthouseIcon from '@/icons/skills/LighthouseIcon';
+import PageSpeedInsightsIcon from '@/icons/skills/PageSpeedInsightsIcon';
+import GTmetrixIcon from '@/icons/skills/GTmetrixIcon';
+import ReduxIcon from '@/icons/skills/ReduxIcon';
 
-// Helper function to get icon paths
-const getIcon = (iconName) => {
-  try {
-    return importIcons(`./${iconName}`).default;
-  } catch (error) {
-    console.error(`Icon not found: ${iconName}`);
-    return null;
-  }
+const skillIcons = {
+  BitBucket: BitBucketIcon,
+  React: ReactIcon,
+  "React Native": ReactNativeIcon,
+  Vue: VueIcon,
+  "Tailwind CSS": TailwindIcon,
+  GSAP: GSAPIcon,
+  Bootstrap: BootstrapIcon,
+  SASS: SASSIcon,
+  TypeScript: TypeScriptIcon,
+  "Java Script": JavaScriptIcon,
+  PHP: PHPIcon,
+  WordPress: WordPressIcon,
+  Drupal: DrupalIcon,
+  Joomla: JoomlaIcon,
+  Prestashop: PrestashopIcon,
+  Laravel: LaravelIcon,
+  Symfony: SymfonyIcon,
+  MySQL: MySQLIcon,
+  Firebase: FirebaseIcon,
+  RestApi: RestApiIcon,
+  Capacitor: CapacitorIcon,
+  Flutter: FlutterIcon,
+  BubbleIo: BubbleIoIcon,
+  WooCommerce: WooCommerceIcon,
+  Shopify: ShopifyIcon,
+  Git: GitIcon,
+  "Ci/Cd": CiCdIcon,
+  Docker: DockerIcon,
+  Cypress: CypressIcon,
+  Lighthouse: LighthouseIcon,
+  "Page Speed Insights": PageSpeedInsightsIcon,
+  GTmetrix: GTmetrixIcon,
+  Redux: ReduxIcon,
 };
 
-// Skills Data with dynamic icon loading
 const skillsData = [
   {
     category: "textSubHeaderFirst",
     skills: [
-      { name: "React", icon: getIcon("react.svg") },
-      { name: "Vue.js", icon: getIcon("vue.svg") },
-      { name: "Tailwind CSS", icon: getIcon("tailwind.svg") },
-      { name: "GSAP", icon: getIcon("gsap.svg") },
-      { name: "Bootstrap", icon: getIcon("bootstrap.svg") },
-      { name: "SASS", icon: getIcon("sass.svg") },
-      { name: "TypeScript", icon: getIcon("typescript.svg") },
+      { name: "SASS" },
+      { name: "Java Script" },
+      { name: "TypeScript" },
+      { name: "Bootstrap" },
+      { name: "Tailwind CSS" },
+      { name: "GSAP" },
+      { name: "React" },
+      { name: "Vue" },
+      { name: "Redux" },
     ],
   },
   {
     category: "textSubHeaderSecond",
     skills: [
-      { name: "WordPress", icon: getIcon("wordpress.svg") },
-      { name: "Laravel", icon: getIcon("laravel.svg") },
+      { name: "PHP" },
+      { name: "Laravel" },
+      { name: "Symfony" },
+      { name: "WordPress" },
+      { name: "Joomla" },
+      { name: "Drupal" },
     ],
   },
   {
     category: "textSubHeaderThird",
     skills: [
-      { name: "MySQL", icon: getIcon("mysql.svg") },
-      { name: "Firebase", icon: getIcon("firebase.svg") },
-      { name: "REST API", icon: getIcon("rest-api.svg") },
+      { name: "MySQL" },
+      { name: "Firebase" },
+      { name: "RestApi" },
     ],
   },
   {
     category: "textSubHeaderFourth",
     skills: [
-      { name: "Capacitor", icon: getIcon("capacitor.svg") },
-      { name: "Flutter", icon: getIcon("flutter.svg") },
+      { name: "React Native" },
+      { name: "Capacitor" },
+      { name: "Flutter" },
+      { name: "Bubble.Io" },
     ],
   },
   {
     category: "textSubHeaderFifth",
     skills: [
-      { name: "WooCommerce", icon: getIcon("woocommerce.svg") },
-      { name: "Shopify", icon: getIcon("shopify.svg") },
+      { name: "WooCommerce" },
+      { name: "Prestashop" },
+      { name: "Shopify" },
     ],
   },
   {
     category: "textSubHeaderSixth",
     skills: [
-      { name: "Git", icon: getIcon("git.svg") },
-      { name: "Docker", icon: getIcon("docker.svg") },
-      { name: "CI/CD", icon: getIcon("cicd.svg") },
-      { name: "GitLab", icon: getIcon("gitlab.svg") },
+      { name: "Git" },
+      { name: "BitBucket" },
+      { name: "Docker" },
+      { name: "Ci/Cd" },
     ],
   },
   {
     category: "textSubHeaderSeventh",
     skills: [
-      { name: "Cypress", icon: getIcon("cypress.svg") },
-      { name: "Lighthouse", icon: getIcon("lighthouse.svg") },
-      { name: "PageSpeed Insights", icon: getIcon("pagespeed.svg") },
+      { name: "Cypress" },
+      { name: "Lighthouse" },
+      { name: "Page Speed Insights" },
     ],
   },
 ];
 
-// Translations
 const skillsContent = {
   textHeader: {
     ENG: "Tech Stack & Tools",
@@ -269,12 +333,15 @@ const Skills = () => {
           <div key={index} className="skill-set">
             <h3>{skillsContent[category.category][displayedLanguage]}</h3>
             <div className="skill-set__grid">
-              {category.skills.map((skill, i) => (
+            {category.skills.map((skill, i) => {
+              const IconComponent = skillIcons[skill.name];
+              return (
                 <div key={i} className="skill-set__grid__item">
-                  <img src={skill.icon} alt={skill.name} />
+                  {IconComponent ? <IconComponent width={50} height={50} color="#fff" /> : null}
                   <span>{skill.name}</span>
                 </div>
-              ))}
+              );
+            })}
             </div>
           </div>
         ))}
