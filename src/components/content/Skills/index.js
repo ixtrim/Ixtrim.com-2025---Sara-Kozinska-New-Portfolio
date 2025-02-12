@@ -30,13 +30,15 @@ import BubbleIoIcon from '@/icons/skills/BubbleIoIcon';
 import WooCommerceIcon from '@/icons/skills/WooCommerceIcon';
 import ShopifyIcon from '@/icons/skills/ShopifyIcon';
 import GitIcon from '@/icons/skills/GitIcon';
-import CiCdIcon from '@/icons/skills/CiCdIcon';
 import DockerIcon from '@/icons/skills/DockerIcon';
 import CypressIcon from '@/icons/skills/CypressIcon';
 import LighthouseIcon from '@/icons/skills/LighthouseIcon';
 import PageSpeedInsightsIcon from '@/icons/skills/PageSpeedInsightsIcon';
 import GTmetrixIcon from '@/icons/skills/GTmetrixIcon';
 import ReduxIcon from '@/icons/skills/ReduxIcon';
+import StrapiIcon from '@/icons/skills/StrapiIcon';
+import PrismicIcon from '@/icons/skills/PrismicIcon';
+import SanityIcon from '@/icons/skills/SanityIcon';
 
 const skillIcons = {
   BitBucket: BitBucketIcon,
@@ -58,20 +60,22 @@ const skillIcons = {
   Symfony: SymfonyIcon,
   MySQL: MySQLIcon,
   Firebase: FirebaseIcon,
-  RestApi: RestApiIcon,
+  "Rest API": RestApiIcon,
   Capacitor: CapacitorIcon,
   Flutter: FlutterIcon,
-  BubbleIo: BubbleIoIcon,
+  "Bubble.Io": BubbleIoIcon,
   WooCommerce: WooCommerceIcon,
   Shopify: ShopifyIcon,
   Git: GitIcon,
-  "Ci/Cd": CiCdIcon,
   Docker: DockerIcon,
   Cypress: CypressIcon,
-  Lighthouse: LighthouseIcon,
+  "Google Lighthouse": LighthouseIcon,
   "Page Speed Insights": PageSpeedInsightsIcon,
   GTmetrix: GTmetrixIcon,
   Redux: ReduxIcon,
+  Strapi: StrapiIcon,
+  Prismic: PrismicIcon,
+  Sanity: SanityIcon,
 };
 
 const skillsData = [
@@ -103,9 +107,12 @@ const skillsData = [
   {
     category: "textSubHeaderThird",
     skills: [
-      { name: "MySQL" },
       { name: "Firebase" },
-      { name: "RestApi" },
+      { name: "Rest API" },
+      { name: "Strapi" },
+      { name: "Prismic" },
+      { name: "Sanity" },
+      { name: "MySQL" },
     ],
   },
   {
@@ -131,14 +138,13 @@ const skillsData = [
       { name: "Git" },
       { name: "BitBucket" },
       { name: "Docker" },
-      { name: "Ci/Cd" },
     ],
   },
   {
     category: "textSubHeaderSeventh",
     skills: [
       { name: "Cypress" },
-      { name: "Lighthouse" },
+      { name: "Google Lighthouse" },
       { name: "Page Speed Insights" },
     ],
   },
