@@ -5,77 +5,77 @@ import theme from '@/theme';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 import BitBucketIcon from '@/icons/skills/BitBucketIcon';
+import BootstrapIcon from '@/icons/skills/BootstrapIcon';
+import BubbleIoIcon from '@/icons/skills/BubbleIoIcon';
+import CapacitorIcon from '@/icons/skills/CapacitorIcon';
+import CypressIcon from '@/icons/skills/CypressIcon';
+import DockerIcon from '@/icons/skills/DockerIcon';
+import DrupalIcon from '@/icons/skills/DrupalIcon';
+import FirebaseIcon from '@/icons/skills/FirebaseIcon';
+import FlutterIcon from '@/icons/skills/FlutterIcon';
+import GSAPIcon from '@/icons/skills/GSAPIcon';
+import GitIcon from '@/icons/skills/GitIcon';
+import GTmetrixIcon from '@/icons/skills/GTmetrixIcon';
+import JavaScriptIcon from '@/icons/skills/JavaScriptIcon';
+import JoomlaIcon from '@/icons/skills/JoomlaIcon';
+import LaravelIcon from '@/icons/skills/LaravelIcon';
+import LighthouseIcon from '@/icons/skills/LighthouseIcon';
+import MySQLIcon from '@/icons/skills/MySQLIcon';
+import PageSpeedInsightsIcon from '@/icons/skills/PageSpeedInsightsIcon';
+import PHPIcon from '@/icons/skills/PHPIcon';
+import PrestashopIcon from '@/icons/skills/PrestashopIcon';
+import PrismicIcon from '@/icons/skills/PrismicIcon';
 import ReactIcon from '@/icons/skills/ReactIcon';
 import ReactNativeIcon from '@/icons/skills/ReactNativeIcon';
-import VueIcon from '@/icons/skills/VueIcon';
-import TailwindIcon from '@/icons/skills/TailwindIcon';
-import GSAPIcon from '@/icons/skills/GSAPIcon';
-import BootstrapIcon from '@/icons/skills/BootstrapIcon';
-import SASSIcon from '@/icons/skills/SASSIcon';
-import TypeScriptIcon from '@/icons/skills/TypeScriptIcon';
-import JavaScriptIcon from '@/icons/skills/JavaScriptIcon';
-import PHPIcon from '@/icons/skills/PHPIcon';
-import WordPressIcon from '@/icons/skills/WordPressIcon';
-import DrupalIcon from '@/icons/skills/DrupalIcon';
-import JoomlaIcon from '@/icons/skills/JoomlaIcon';
-import PrestashopIcon from '@/icons/skills/PrestashopIcon';
-import LaravelIcon from '@/icons/skills/LaravelIcon';
-import SymfonyIcon from '@/icons/skills/SymfonyIcon';
-import MySQLIcon from '@/icons/skills/MySQLIcon';
-import FirebaseIcon from '@/icons/skills/FirebaseIcon';
-import RestApiIcon from '@/icons/skills/RestApiIcon';
-import CapacitorIcon from '@/icons/skills/CapacitorIcon';
-import FlutterIcon from '@/icons/skills/FlutterIcon';
-import BubbleIoIcon from '@/icons/skills/BubbleIoIcon';
-import WooCommerceIcon from '@/icons/skills/WooCommerceIcon';
-import ShopifyIcon from '@/icons/skills/ShopifyIcon';
-import GitIcon from '@/icons/skills/GitIcon';
-import DockerIcon from '@/icons/skills/DockerIcon';
-import CypressIcon from '@/icons/skills/CypressIcon';
-import LighthouseIcon from '@/icons/skills/LighthouseIcon';
-import PageSpeedInsightsIcon from '@/icons/skills/PageSpeedInsightsIcon';
-import GTmetrixIcon from '@/icons/skills/GTmetrixIcon';
 import ReduxIcon from '@/icons/skills/ReduxIcon';
-import StrapiIcon from '@/icons/skills/StrapiIcon';
-import PrismicIcon from '@/icons/skills/PrismicIcon';
+import RestApiIcon from '@/icons/skills/RestApiIcon';
+import SASSIcon from '@/icons/skills/SASSIcon';
 import SanityIcon from '@/icons/skills/SanityIcon';
+import ShopifyIcon from '@/icons/skills/ShopifyIcon';
+import StrapiIcon from '@/icons/skills/StrapiIcon';
+import SymfonyIcon from '@/icons/skills/SymfonyIcon';
+import TailwindIcon from '@/icons/skills/TailwindIcon';
+import TypeScriptIcon from '@/icons/skills/TypeScriptIcon';
+import VueIcon from '@/icons/skills/VueIcon';
+import WooCommerceIcon from '@/icons/skills/WooCommerceIcon';
+import WordPressIcon from '@/icons/skills/WordPressIcon';
 
 const skillIcons = {
-  BitBucket: BitBucketIcon,
-  React: ReactIcon,
-  "React Native": ReactNativeIcon,
-  Vue: VueIcon,
-  "Tailwind CSS": TailwindIcon,
-  GSAP: GSAPIcon,
-  Bootstrap: BootstrapIcon,
-  SASS: SASSIcon,
-  TypeScript: TypeScriptIcon,
-  "Java Script": JavaScriptIcon,
-  PHP: PHPIcon,
-  WordPress: WordPressIcon,
-  Drupal: DrupalIcon,
-  Joomla: JoomlaIcon,
-  Prestashop: PrestashopIcon,
-  Laravel: LaravelIcon,
-  Symfony: SymfonyIcon,
-  MySQL: MySQLIcon,
-  Firebase: FirebaseIcon,
-  "Rest API": RestApiIcon,
-  Capacitor: CapacitorIcon,
-  Flutter: FlutterIcon,
+  "BitBucket": BitBucketIcon,
+  "Bootstrap": BootstrapIcon,
   "Bubble.Io": BubbleIoIcon,
-  WooCommerce: WooCommerceIcon,
-  Shopify: ShopifyIcon,
-  Git: GitIcon,
-  Docker: DockerIcon,
-  Cypress: CypressIcon,
+  "Capacitor": CapacitorIcon,
+  "Cypress": CypressIcon,
+  "Docker": DockerIcon,
+  "Drupal": DrupalIcon,
+  "Firebase": FirebaseIcon,
+  "Flutter": FlutterIcon,
+  "GSAP": GSAPIcon,
+  "Git": GitIcon,
   "Google Lighthouse": LighthouseIcon,
+  "GTmetrix": GTmetrixIcon,
+  "Java Script": JavaScriptIcon,
+  "Joomla": JoomlaIcon,
+  "Laravel": LaravelIcon,
+  "MySQL": MySQLIcon,
   "Page Speed Insights": PageSpeedInsightsIcon,
-  GTmetrix: GTmetrixIcon,
-  Redux: ReduxIcon,
-  Strapi: StrapiIcon,
-  Prismic: PrismicIcon,
-  Sanity: SanityIcon,
+  "PHP": PHPIcon,
+  "Prestashop": PrestashopIcon,
+  "Prismic": PrismicIcon,
+  "React": ReactIcon,
+  "React Native": ReactNativeIcon,
+  "Redux": ReduxIcon,
+  "Rest API": RestApiIcon,
+  "SASS": SASSIcon,
+  "Sanity": SanityIcon,
+  "Shopify": ShopifyIcon,
+  "Strapi": StrapiIcon,
+  "Symfony": SymfonyIcon,
+  "Tailwind CSS": TailwindIcon,
+  "TypeScript": TypeScriptIcon,
+  "Vue": VueIcon,
+  "WooCommerce": WooCommerceIcon,
+  "WordPress": WordPressIcon,
 };
 
 const skillsData = [
@@ -250,7 +250,7 @@ const skillsStyles = css`
         }
 
       h3 {
-        margin: auto 0 27px 0;
+        margin: auto 0 30px 0;
         padding: 0;
         line-height: 1em;
       }
